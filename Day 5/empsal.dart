@@ -1,36 +1,28 @@
 import 'dart:io';
+import 'dart:math';
 
 void main() {
-  num DA, PF, HRA = 500;
-  print('Enter The Name');
+  //List Employee = [];
+  double sal = 0;
+  print('Enter the Name of Employee: ');
   dynamic name = stdin.readLineSync();
-  print('Enter The Designation');
-  dynamic designation = stdin.readLineSync();
-  int? basic_pay;
-  print('Enter Bassic Salarry');
-  basic_pay = int.parse(stdin.readLineSync()!);
-  // ignore: omit_local_variable_types
-  List<dynamic> NET_SAL = [];
-
-  if (basic_pay < 10000) {
-    DA = (basic_pay * 60) / 100;
-    PF = (basic_pay * 15) / 100;
-    NET_SAL = [
-      {basic_pay + DA + HRA - PF}
-    ];
+  //Employee.add(name);
+  print('Enter Sale Amount');
+  int? Sale_amount = int.parse(stdin.readLineSync()!);
+  int i = Sale_amount;
+  if (Sale_amount < 10000) {
+    print('work hard to get mch more');
+    print('status of salary is : $Sale_amount');
+  } else if (i < 30000) {
+    sal = i * 15 / 100;
+    print('work hard for more happiness');
+    print('status of salary is : $sal');
+  } else if (i >= 30000) {
+    sal = 1 * 25 / 100;
+    double amt = sal + 1000;
+    print('work hard and keep it up');
+    print('status of salary is : $amt');
   } else {
-    DA = (basic_pay * 75) / 100;
-    PF = (basic_pay * 20) / 100;
-    NET_SAL = [
-      {basic_pay + DA + HRA - PF}
-    ];
+    print('keep trying');
   }
-
-  print('Name of Employee : $name');
-  print('Possition is : $designation');
-  print('Basic_Salarry : $basic_pay');
-  print('HRA : $HRA');
-  print('PF : $PF');
-  print('DA : $DA');
-  print('NET_SALARRY $NET_SAL');
 }
