@@ -1,0 +1,3 @@
+class Herbivores {
+  void animalEat();
+}
