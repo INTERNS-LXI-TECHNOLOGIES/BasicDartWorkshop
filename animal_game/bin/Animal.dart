@@ -1,4 +1,4 @@
 abstract class Animal {
-  //string name;
-  int energyLevel;
+  String? name;
+  int? energyLevel;
 }
