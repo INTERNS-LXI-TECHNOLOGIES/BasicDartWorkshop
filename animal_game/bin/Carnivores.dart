@@ -1,4 +1,4 @@
 class Carnivores {
-  void animalEat();
-  void animalFight();
+  // void animalEat();
+  // void animalFight();
 }

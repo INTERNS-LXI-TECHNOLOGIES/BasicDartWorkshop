@@ -1,15 +1,26 @@
 import 'dart:io';
 import 'Animal.dart';
-//import 'Carnivores.dart';
+import 'Carnivores.dart';
 
-class Tiger extends Animal /* implements Carnivores*/ {
+class Tiger extends Animal implements Carnivores {
+  @override
   String? name;
+  @override
   int? energyLevel;
-  Tiger(String name, int energyLevel) {
+  @override
+  int? hungryLevel;
+  Tiger(String name, int energyLevel, int hungryLevel) {
     this.name = name;
     this.energyLevel = energyLevel;
+    this.hungryLevel = hungryLevel;
   }
+  @override
   void printTiger() {
     print(name);
+  }
+
+  @override
+  void animalEat() {
+    print('$name name eat meet');
   }
 }
