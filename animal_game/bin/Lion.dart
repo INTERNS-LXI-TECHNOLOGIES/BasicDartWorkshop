@@ -16,6 +16,6 @@ class Lion extends Animal /*implements Carnivores*/ {
   }
 
   void animalEat() {
-    print('$name  eat meet');
+    print('eat meet');
   }
 }

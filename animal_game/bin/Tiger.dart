@@ -14,13 +14,14 @@ class Tiger extends Animal implements Carnivores {
     this.energyLevel = energyLevel;
     this.hungryLevel = hungryLevel;
   }
-  @override
-  void printTiger() {
-    print(name);
-  }
+
+  // void printTiger() {
+  //   print(name);
+  // }
 
   @override
   void animalEat() {
-    print('$name name eat meet');
+    print('$name  eat meat');
+    //print("tigerdemo");
   }
 }
