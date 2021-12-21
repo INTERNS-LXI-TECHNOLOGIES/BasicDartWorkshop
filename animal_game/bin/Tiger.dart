@@ -9,19 +9,25 @@ class Tiger extends Animal implements Carnivores {
   int? energyLevel;
   @override
   int? hungryLevel;
+  //bool isFight = true;
   Tiger(String name, int energyLevel, int hungryLevel) {
     this.name = name;
     this.energyLevel = energyLevel;
     this.hungryLevel = hungryLevel;
   }
 
-  // void printTiger() {
-  //   print(name);
-  // }
+  getName() {
+    print(name);
+  }
 
   @override
-  void animalEat() {
+  animalEat() {
     print('$name  eat meat');
     //print("tigerdemo");
+  }
+
+  bool animalFight() {
+    bool isFight = true;
+    return isFight;
   }
 }

@@ -1,3 +1,4 @@
 class Herbivores {
-  //void animalEat();
+//  void animalEat();
+  bool isFight = false;
 }

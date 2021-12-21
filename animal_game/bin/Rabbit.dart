@@ -1,21 +1,27 @@
 import 'dart:io';
 import 'Animal.dart';
-//import 'Herbivores.dart';
+import 'Herbivores.dart';
 
-class Rabbit extends Animal /*implements Herbivores*/ {
+class Rabbit extends Animal implements Herbivores {
   String? name;
   int? energyLevel;
   int? hungryLevel;
+  //bool isFight = false;
   Rabbit(String name, int energyLevel, int hungryLevel) {
     this.name = name;
     this.energyLevel = energyLevel;
     this.hungryLevel = hungryLevel;
   }
-  void printRabbit() {
+  getName() {
     print(name);
   }
 
-  void animalEat() {
+  animalEat() {
     print('$name  eat carrot');
+  }
+
+  bool animalFight() {
+    bool isFight = false;
+    return isFight;
   }
 }
