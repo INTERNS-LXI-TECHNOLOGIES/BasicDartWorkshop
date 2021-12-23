@@ -34,7 +34,7 @@ class Forest {
   }
 
   void selectAnimal() {
-    for (int i = 0; i < animalList.length; i++) {
+    for (int i = 0; i < 20; i++) {
       int? x = mathRandom(3);
       int? y = mathRandom(3);
       if (x != y) {
@@ -56,6 +56,7 @@ class Forest {
           a2.energyLevel! - 10;
           if (a1.energyLevel! <= 0) {
             a1.isAlive = false;
+            animalList.remove(a1);
           }
         } else {
           print('\n+++++***${a2.name} is the winner ***+++++\n');
@@ -64,27 +65,28 @@ class Forest {
           a1.energyLevel! - 10;
           if (a2.energyLevel! <= 0) {
             a2.isAlive = false;
+            animalList.remove(a2);
           }
         }
       } else {
         print('\n******they are friends*****\n');
       }
-      winnerAnimal();
     }
+
+    winner();
   }
 
-  void winnerAnimal() {
-    int count = 0, k = 0, c = 0;
+  void winner() {
+    int x = 0, win = 0;
     for (int i = 0; i < animalList.length; i++) {
-      if (animalList[i].isAlive == true &&
-          animalList[k].animalFight() == true) {
-        count++;
-        c = count;
-        k = i;
+      if (animalList[i].isAlive == true && animalList[i].isFight == true) {
+        x++;
+        win = i;
       }
     }
-    if (count == 2 && animalList[k].animalFight() == true) {
-      print("\n\n\t+++++++++++The KING is ${animalList[k].name} ++++++++++");
+    if (x == 1) {
+      print('***********++++++++++--------*********//////');
+      print('${animalList[win].name}is the winner');
     }
   }
 }
@@ -99,47 +101,7 @@ int mathRandom(int a) {
 
 
 
-  // animalMeet();
-  //winnerAnimal();
-  // }
-
-  // void animalMeet() {
-  //   print('** Animal meet**');
-  //   int x, y;
-  //   for (int i = 0; i < 20; i++) {
-  //     x = mathRandom(3);
-  //     y = mathRandom(3);
-  //     if (x != y) {
-  //       if (animalList[x].isAlive == true && animalList[y].isAlive == true) {
-  //         print('\n${animalList[x].name} \tmeet\t ${animalList[y].name}');
-  //         if (animalList[x].animalFight() == true ||
-  //             animalList[y].animalFight() == true) {
-  //           print('\t*****Fight begins*****');
-  //           if (animalList[x].energyLevel! > animalList[y].energyLevel! &&
-  //               animalList[x].hungryLevel! > animalList[y].hungryLevel!) {
-  //             print('\n++++***${animalList[x].name} is the winner ***+++++\n');
-  //             animalList[x].energyLevel! - 5;
-  //             animalList[x].hungryLevel! - 5;
-  //             animalList[y].energyLevel! - 10;
-  //             if (animalList[x].energyLevel! <= 0) {
-  //               animalList[x].isAlive = false;
-  //             }
-  //           } else {
-  //             print('\n+++++***${animalList[y].name} is the winner ***+++++\n');
-  //             animalList[y].energyLevel! - 5;
-  //             animalList[y].hungryLevel! - 5;
-  //             animalList[x].energyLevel! - 10;
-  //             if (animalList[y].energyLevel! <= 0) {
-  //               animalList[y].isAlive = false;
-  //             }
-  //           }
-  //         } else {
-  //           print('\n******they are friends*****\n');
-  //         }
-  //       }
-  //     }
-  //   }
-
+  
   // void winnerAnimal() {
   //   int count = 0, k = 0, c = 0;
   //   for (int i = 0; i < 10; i++) {
