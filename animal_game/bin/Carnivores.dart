@@ -1,5 +1,7 @@
+// ignore_for_file: file_names
+
 class Carnivores {
 //  void animalEat();
-  // void animalFight();
+  // bool? animalFight();
   bool isFight = true;
 }

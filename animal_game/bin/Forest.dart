@@ -3,12 +3,15 @@
 import 'dart:core';
 import 'dart:math';
 import 'Animal.dart';
+import 'Carnivores.dart';
 import 'Elephant.dart';
+import 'Herbivores.dart';
 import 'Lion.dart';
 import 'Rabbit.dart';
 import 'Tiger.dart';
 
 class Forest {
+  //Animals in the forest
   List<Animal> animalList = [
     Tiger('tigu', mathRandom(45), mathRandom(65), 30, 20),
     Lion('lion king', mathRandom(55), mathRandom(80), 30, 20),
@@ -18,7 +21,7 @@ class Forest {
 //
 //
 //
-//
+//Animal deatails
 
   void printAnimal() {
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
@@ -57,14 +60,16 @@ class Forest {
 //
 //
 //
-//
+//Select two random animals
 
   void selectAnimal() {
     int w = 0;
     do {
       w = 0;
       for (int i = 0; i < animalList.length; i++) {
-        if (animalList[i].isAlive == true && animalList[i].isFight == true) {
+        if (animalList[i].isAlive == true &&
+            animalList[i] is Carnivores &&
+            animalList[i].isFight == true) {
           w++;
         }
       }
@@ -82,18 +87,24 @@ class Forest {
         animalDistance(animalList[x], animalList[y]);
       }
     } while (w != 1);
+  }
 
-
   //
   //
-  //
+  //check their distance
   int animalDistance(Animal an1, Animal an2) {
     List? an_list1 = an1.animal_dis();
     List? an_list2 = an2.animal_dis();
     int r =
         ((an_list1![0] - an_list2![0]) ^ 2 + (an_list1[1] - an_list2[1]) ^ 2);
     if (r > 5) {
+      // if (an1 is Herbivores || an2 is Herbivores) {
+      //   if (an1.luckFact() > 5 || an2.luckFact() > 5) {
+      //     print('he got luck');
+      //   } else {
       print('\n\t*******${an1.name} & ${an2.name} are in the range');
+      // }
+      // }
       animalFight(an1, an2);
     } else {
       print('\n\t*******${an1.name} far from ${an2.name}');
@@ -106,7 +117,7 @@ class Forest {
 
   //
   //
-  //
+  //Do fight
 
   void animalFight(Animal a1, Animal a2) {
     if (a1.isAlive == true && a2.isAlive == true) {
@@ -116,8 +127,12 @@ class Forest {
         print('\t*****Fight begins*****');
         if (a1.energyLevel! > a2.energyLevel! &&
             a1.hungryLevel! > a2.hungryLevel!) {
-          print(
-              '\n++++***${a1.name}-${a1.energyLevel}  is the winner ***+++++\n');
+          if (a1.animalFight() == true) {
+            print(
+                '\n++++***${a1.name}-${a1.energyLevel}  is the winner ***+++++\n');
+          } else {
+            print('${a1.name} is surived');
+          }
           a1.energyLevel = a1.energyLevel! - 10;
           a1.energyLevel = a1.hungryLevel! - 10;
           a2.energyLevel = a2.energyLevel! - 20;
@@ -126,8 +141,12 @@ class Forest {
             a2.isAlive = false;
           }
         } else {
-          print(
-              '\n+++++***${a2.name}-${a2.energyLevel} is the winner ***+++++\n');
+          if (a2.animalFight() == true) {
+            print(
+                '\n++++***${a2.name}-${a2.energyLevel}  is the winner ***+++++\n');
+          } else {
+            print('${a2.name} is surived');
+          }
           a2.energyLevel = a2.energyLevel! - 10;
           a2.hungryLevel = a2.hungryLevel! - 10;
           a1.energyLevel = a1.energyLevel! - 20;
@@ -146,7 +165,7 @@ class Forest {
 //
 //
 //
-//
+//Pickup the orginal winner
   void winner() {
     int x = 0, win = 0;
     for (int i = 0; i < animalList.length; i++) {
@@ -160,7 +179,7 @@ class Forest {
 
     if (x == 1) {
       print('***********++++++++++--------*********//////');
-      print('${animalList[win].name}is the winner winner');
+      print('${animalList[win].name}  is the winner winner');
     } else {
       //print('${animalList[win].name}ooooopppppsssss!!!!');
     }

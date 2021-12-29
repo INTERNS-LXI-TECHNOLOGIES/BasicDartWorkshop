@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_initializing_formals
 
 import 'dart:io';
 import 'dart:math';

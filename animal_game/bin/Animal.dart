@@ -1,7 +1,6 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_import
 
 import 'Carnivores.dart';
-import 'dart:math';
 import 'Herbivores.dart';
 
 abstract class Animal {
@@ -12,11 +11,11 @@ abstract class Animal {
   int? y;
   bool isFight = true;
   bool isAlive = true;
-  animalEat() {}
+  animalEat();
 
-  getName() {}
+  getName();
 
-  List? animal_dis() {}
+  List? animal_dis();
 
-  bool? animalFight() {}
+  bool? animalFight();
 }
