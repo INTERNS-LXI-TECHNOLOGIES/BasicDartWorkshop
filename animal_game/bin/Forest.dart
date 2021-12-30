@@ -26,8 +26,9 @@ class Forest {
   void printAnimal() {
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
     for (int i = 0; i < animalList.length; i++) {
-      print(animalList[i].getName());
-      print(animalList[i].animalEat());
+    //Earlier it was print(animalList[i].getName()); There were two print calls, printing a void method results in printing null
+      animalList[i].getName();
+      animalList[i].animalEat();
       print('\n**');
     }
     selectAnimal();
