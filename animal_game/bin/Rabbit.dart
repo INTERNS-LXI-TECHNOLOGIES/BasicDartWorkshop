@@ -51,4 +51,12 @@ class Rabbit extends Animal implements Herbivores {
     int luck = random.nextInt(20) + 1;
     return luck;
   }
+
+  @override
+  herbEscape() {
+    // TODO: implement herbEscape
+    //throw UnimplementedError();
+    // ignore: dead_code
+    print('$name got luck and it ran away!!!!!');
+  }
 }

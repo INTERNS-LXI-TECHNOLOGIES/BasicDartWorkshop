@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, overridden_fields
+// ignore_for_file: file_names, overridden_fields, prefer_initializing_formals
 
 import 'dart:io';
 import 'dart:math';
@@ -21,6 +21,7 @@ class Tiger extends Animal implements Carnivores {
     this.y = y;
   }
 
+  @override
   getName() {
     print(name);
   }

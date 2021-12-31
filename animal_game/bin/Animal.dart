@@ -13,9 +13,13 @@ abstract class Animal {
   bool isAlive = true;
   animalEat();
 
-  getName();
+  getName() {}
 
   List? animal_dis();
 
   bool? animalFight();
+
+  luckFact() {}
+
+  herbEscape() {}
 }

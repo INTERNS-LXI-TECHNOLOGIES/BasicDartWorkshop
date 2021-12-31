@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_new
 
 import 'dart:core';
 import 'dart:math';
@@ -13,11 +13,18 @@ import 'Tiger.dart';
 class Forest {
   //Animals in the forest
   List<Animal> animalList = [
-    Tiger('tigu', mathRandom(45), mathRandom(65), 30, 20),
-    Lion('lion king', mathRandom(55), mathRandom(80), 30, 20),
-    Elephant('pambadi rajan', mathRandom(35), mathRandom(70), 20, 15),
-    Rabbit('kuttu the rabbit', mathRandom(20), mathRandom(30), 10, 10)
+    // ignore: unnecessary_new
+    // new Tiger('tigu', mathRandom(45), mathRandom(65), 30, 20),
+    // new Lion('lion king', mathRandom(55), mathRandom(80), 30, 20),
+    // new Elephant('pambadi rajan', mathRandom(35), mathRandom(70), 20, 15),
+    // new Rabbit('kuttu the rabbit', mathRandom(20), mathRandom(30), 10, 10)
   ];
+  Tiger t1 = new Tiger('sherkhan', mathRandom(45), mathRandom(65), 30, 20);
+  Elephant e1 =
+      new Elephant('pambadi rajan', mathRandom(35), mathRandom(70), 20, 15);
+  Rabbit r1 =
+      new Rabbit('kuttu the rabbit', mathRandom(20), mathRandom(30), 10, 10);
+  Lion l1 = new Lion('lion king', mathRandom(55), mathRandom(80), 30, 20);
 //
 //
 //
@@ -25,9 +32,14 @@ class Forest {
 
   void printAnimal() {
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
+    animalList.add(t1);
+    animalList.add(l1);
+    animalList.add(e1);
+    animalList.add(r1);
+    //print(t1.animalEat());
     for (int i = 0; i < animalList.length; i++) {
-      print(animalList[i].getName());
-      print(animalList[i].animalEat());
+      animalList[i].getName();
+      animalList[i].animalEat();
       print('\n**');
     }
     selectAnimal();
@@ -98,14 +110,17 @@ class Forest {
     int r =
         ((an_list1![0] - an_list2![0]) ^ 2 + (an_list1[1] - an_list2[1]) ^ 2);
     if (r > 5) {
-      // if (an1 is Herbivores || an2 is Herbivores) {
-      //   if (an1.luckFact() > 5 || an2.luckFact() > 5) {
-      //     print('he got luck');
-      //   } else {
       print('\n\t*******${an1.name} & ${an2.name} are in the range');
-      // }
-      // }
-      animalFight(an1, an2);
+      if (an1 is Herbivores && an1.luckFact() > 5) {
+        an1.herbEscape();
+      } else if (an2 is Herbivores && an2.luckFact() > 5) {
+        //print('\n\t*******${an1.name} & ${an2.name} are in the range');
+//        print('\t\t\t\t****************he got luck');
+        an2.herbEscape();
+      } else {
+        // print('\n\t*******${an1.name} & ${an2.name} are in the range');
+        animalFight(an1, an2);
+      }
     } else {
       print('\n\t*******${an1.name} far from ${an2.name}');
     }
@@ -163,6 +178,7 @@ class Forest {
   }
 
 //
+
 //
 //
 //Pickup the orginal winner

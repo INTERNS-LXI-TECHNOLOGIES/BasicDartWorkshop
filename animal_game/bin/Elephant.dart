@@ -22,7 +22,7 @@ class Elephant extends Animal implements Herbivores {
   }
   @override
   getName() {
-    print(this.name);
+    print(name);
   }
 
   @override
@@ -37,6 +37,7 @@ class Elephant extends Animal implements Herbivores {
   }
 
   @override
+  // ignore: non_constant_identifier_names
   List animal_dis() {
     var random = Random();
     int r1 = random.nextInt(x!) + 5;
@@ -46,9 +47,18 @@ class Elephant extends Animal implements Herbivores {
     return list_dis;
   }
 
+  @override
   int luckFact() {
     var random = Random();
     int luck = random.nextInt(20) + 1;
     return luck;
+  }
+
+  @override
+  herbEscape() {
+    // TODO: implement herbEscape
+    //throw UnimplementedError();
+    // ignore: dead_code
+    print('$name got luck and it ran away!!!!!');
   }
 }
