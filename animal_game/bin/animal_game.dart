@@ -1,8 +1,9 @@
 import 'dart:io';
-import 'Forest.dart';
+import 'forest.dart';
 
 void main() {
   Forest forest = Forest();
-  forest.printAnimal();
+  forest.generateAnimals();
+  forest.printDeatails();
   //forest.winnerAnimal();
 }

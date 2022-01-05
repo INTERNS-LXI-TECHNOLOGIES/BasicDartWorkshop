@@ -2,23 +2,16 @@
 
 import 'dart:io';
 import 'dart:math';
-import 'Animal.dart';
-import 'Herbivores.dart';
+import 'animal.dart';
+import 'herbivores.dart';
 
 class Rabbit extends Animal implements Herbivores {
-  @override
-  String? name;
-  @override
-  int? energyLevel;
-  @override
-  int? hungryLevel;
-  //bool isFight = false;
   Rabbit(String name, int energyLevel, int hungryLevel, int x, int y) {
-    this.name = name;
-    this.energyLevel = energyLevel;
-    this.hungryLevel = hungryLevel;
-    this.x = x;
-    this.y = y;
+    super.name = name;
+    super.energyLevel = energyLevel;
+    super.hungryLevel = hungryLevel;
+    super.x = x;
+    super.y = y;
   }
   @override
   getName() {
@@ -26,18 +19,18 @@ class Rabbit extends Animal implements Herbivores {
   }
 
   @override
-  animalEat() {
+  eat() {
     print('$name  eat carrot');
   }
 
   @override
-  bool animalFight() {
+  bool fightAnimals() {
     bool isFight = false;
     return isFight;
   }
 
   @override
-  List animal_dis() {
+  List distance() {
     var random = new Random();
     int r1 = random.nextInt(x!) + 5;
     int r2 = random.nextInt(y!) + 5;
@@ -53,7 +46,7 @@ class Rabbit extends Animal implements Herbivores {
   }
 
   @override
-  herbEscape() {
+  escapeHerb() {
     // TODO: implement herbEscape
     //throw UnimplementedError();
     // ignore: dead_code

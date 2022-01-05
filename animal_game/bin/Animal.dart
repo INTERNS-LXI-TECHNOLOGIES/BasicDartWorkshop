@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, unused_import
 
-import 'Carnivores.dart';
-import 'Herbivores.dart';
+import 'carnivores.dart';
+import 'herbivores.dart';
 
 abstract class Animal {
   String? name;
@@ -11,15 +11,20 @@ abstract class Animal {
   int? y;
   bool isFight = true;
   bool isAlive = true;
-  animalEat();
+  eat();
 
   getName() {}
 
-  List? animal_dis();
+  List? distance();
 
-  bool? animalFight();
+  bool? fightAnimals();
 
   luckFact() {}
 
-  herbEscape() {}
+  escapeHerb() {}
+
+  // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+  Animal fightCarnivores(Animal ani) {
+    return ani;
+  }
 }

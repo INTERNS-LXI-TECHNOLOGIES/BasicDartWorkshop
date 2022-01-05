@@ -2,23 +2,16 @@
 
 import 'dart:io';
 import 'dart:math';
-import 'Animal.dart';
-import 'Carnivores.dart';
+import 'animal.dart';
+import 'carnivores.dart';
 
 class Tiger extends Animal implements Carnivores {
-  @override
-  String? name;
-  @override
-  int? energyLevel;
-  @override
-  int? hungryLevel;
-  //bool isFight = true;
   Tiger(String name, int energyLevel, int hungryLevel, int x, int y) {
-    this.name = name;
-    this.energyLevel = energyLevel;
-    this.hungryLevel = hungryLevel;
-    this.x = x;
-    this.y = y;
+    super.name = name;
+    super.energyLevel = energyLevel;
+    super.hungryLevel = hungryLevel;
+    super.x = x;
+    super.y = y;
   }
 
   @override
@@ -27,22 +20,35 @@ class Tiger extends Animal implements Carnivores {
   }
 
   @override
-  animalEat() {
+  eat() {
     print('$name  eat meat');
     //print("tigerdemo");
   }
 
-  bool animalFight() {
+  bool fightAnimals() {
     bool isFight = true;
     return isFight;
   }
 
-  List animal_dis() {
+  @override
+  List distance() {
     var random = new Random();
     int r1 = random.nextInt(x!) + 5;
     int r2 = random.nextInt(y!) + 5;
 
     List<int> list_dis = [r1, r2];
     return list_dis;
+  }
+
+  @override
+  Animal fightCarnivores(Animal ani) {
+    if (energyLevel! > ani.energyLevel! && hungryLevel! > ani.hungryLevel!) {
+      print('***********************************$name is the winner');
+      energyLevel = energyLevel! - 5;
+      hungryLevel = hungryLevel! - 5;
+      return this;
+    } else {
+      return ani;
+    }
   }
 }
