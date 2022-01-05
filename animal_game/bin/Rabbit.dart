@@ -6,12 +6,10 @@ import 'animal.dart';
 import 'herbivores.dart';
 
 class Rabbit extends Animal implements Herbivores {
-  Rabbit(String name, int energyLevel, int hungryLevel, int x, int y) {
+  Rabbit(String name, int energyLevel, int hungryLevel) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
-    super.x = x;
-    super.y = y;
   }
   @override
   getName() {
@@ -32,8 +30,8 @@ class Rabbit extends Animal implements Herbivores {
   @override
   List distance() {
     var random = new Random();
-    int r1 = random.nextInt(x!) + 5;
-    int r2 = random.nextInt(y!) + 5;
+    int r1 = random.nextInt(15) + 5;
+    int r2 = random.nextInt(15) + 5;
 
     List<int> listDis = [r1, r2];
     return listDis;

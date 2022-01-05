@@ -13,12 +13,10 @@ import 'tiger.dart';
 class Forest {
   //Animals in the forest
   List<Animal> animalList = [];
-  Tiger t1 = Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65), 30, 20);
-  Elephant e1 =
-      Elephant('pambadi rajan', mathRandom(35) + 15, mathRandom(70), 20, 15);
-  Rabbit r1 =
-      Rabbit('kuttu the rabbit', mathRandom(20) + 10, mathRandom(30), 10, 10);
-  Lion l1 = Lion('lion king', mathRandom(55) + 20, mathRandom(80), 30, 20);
+  Tiger t1 = Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65));
+  Elephant e1 = Elephant('pambadi rajan', mathRandom(35) + 15, mathRandom(70));
+  Rabbit r1 = Rabbit('kuttu the rabbit', mathRandom(20) + 10, mathRandom(30));
+  Lion l1 = Lion('lion king', mathRandom(55) + 20, mathRandom(80));
 //
   generateAnimals() {
     animalList.add(t1);
@@ -51,7 +49,7 @@ class Forest {
 //
 //
 //
-//Select two random animals
+//Select  random animals
 
   void selectAnimals() {
     int w = 0;
@@ -83,7 +81,7 @@ class Forest {
 
   //
   //
-  //
+  //Distance b/w animals
   int distance(Animal an1, Animal an2) {
     List? anList1 = an1.distance();
     List? anList2 = an2.distance();
@@ -94,19 +92,16 @@ class Forest {
   //
 
   //
-  //check their distance
+  //activities of animals
   void actions(Animal an1, Animal an2, int r) {
-    List? anList1 = an1.distance();
-    List? anList2 = an2.distance();
-    int r = ((anList1![0] - anList2![0]) ^ 2 + (anList1[1] - anList2[1]) ^ 2);
-    if (r > 5) {
+    if (r > 2) {
       print('\n\t*******${an1.name} & ${an2.name} are in the range');
-      if (an1 is Herbivores && an1.luckFact() > 5) {
+      if (an1 is Herbivores && an1.luckFact() > 15) {
         an1.escapeHerb();
-      } else if (an2 is Herbivores && an2.luckFact() > 5) {
+      } else if (an2 is Herbivores && an2.luckFact() > 15) {
         an2.escapeHerb();
       } else {
-        fight(an1, an2);
+        arrangeFight(an1, an2);
       }
     } else {
       print('\n\t*******${an1.name} far from ${an2.name}');
@@ -115,60 +110,37 @@ class Forest {
 
   //
   //
-  //Do fight
+  //set fight
 
-  void fight(Animal a1, Animal a2) {
+  void arrangeFight(Animal a1, Animal a2) {
     if (a1.isAlive == true && a2.isAlive == true) {
-      print(
-          '\n${a1.name}-${a1.energyLevel} \tmeet\t ${a2.name}-${a2.energyLevel}\n');
+      print('\n${a1.name}- \tmeet\t ${a2.name}-\n');
       if (a1.fightAnimals() == true || a2.fightAnimals() == true) {
         print('\n\t*****Fight begins*****');
-        if (a1 is Carnivores) {
+        if (a1 is Carnivores && a1.fightAnimals() == true) {
           a1.fightCarnivores(a2);
           a2.energyLevel = a2.energyLevel! - 10;
           a2.hungryLevel = a2.hungryLevel! - 10;
           if (a2.energyLevel! <= 0) {
             a2.isAlive = false;
           }
-        } else if (a2 is Carnivores) {
+        } else if (a2 is Carnivores && a2.fightAnimals() == true) {
           a2.fightCarnivores(a1);
           a1.energyLevel = a1.energyLevel! - 10;
           a1.hungryLevel = a1.hungryLevel! - 10;
           if (a1.energyLevel! <= 0) {
             a1.isAlive = false;
           }
+        } else if (a1 is Carnivores && a2 is Carnivores) {
+          a1.fightCarnivores(a2);
+          a2.energyLevel = a2.energyLevel! - 10;
+          a2.hungryLevel = a2.hungryLevel! - 10;
+          if (a2.energyLevel! <= 0) {
+            a2.isAlive = false;
+          }
+        } else {
+          print('**************************************************No Fights');
         }
-        // print('\t*****Fight begins*****');
-        // if (a1.energyLevel! > a2.energyLevel! &&
-        //     a1.hungryLevel! > a2.hungryLevel!) {
-        //   if (a1.fightAnimals() == true) {
-        //     print(
-        //         '\n++++***${a1.name}-${a1.energyLevel}  is the winner ***+++++\n');
-        //   } else {
-        //     print('${a1.name} is surived');
-        //   }
-        //   a1.energyLevel = a1.energyLevel! - 10;
-        //   a1.energyLevel = a1.hungryLevel! - 10;
-        //   a2.energyLevel = a2.energyLevel! - 20;
-        //   print('energy level afterfight=${a1.energyLevel} ');
-        //   if (a2.energyLevel! <= 0) {
-        //     a2.isAlive = false;
-        //   }
-        // } else {
-        //   if (a2.fightAnimals() == true) {
-        //     print(
-        //         '\n++++***${a2.name}-${a2.energyLevel}  is the winner ***+++++\n');
-        //   } else {
-        //     print('${a2.name} is surived');
-        //   }
-        //   a2.energyLevel = a2.energyLevel! - 10;
-        //   a2.hungryLevel = a2.hungryLevel! - 10;
-        //   a1.energyLevel = a1.energyLevel! - 20;
-        //   print('energy level afterfight=${a1.energyLevel} ');
-        //   if (a1.energyLevel! <= 0) {
-        //     a1.isAlive = false;
-        //   }
-        // }
       } else {
         print('\n******they are friends*****\n');
       }

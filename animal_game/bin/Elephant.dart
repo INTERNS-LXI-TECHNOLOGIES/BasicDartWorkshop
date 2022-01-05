@@ -6,12 +6,10 @@ import 'animal.dart';
 import 'herbivores.dart';
 
 class Elephant extends Animal implements Herbivores {
-  Elephant(String name, int energyLevel, int hungryLevel, int x, int y) {
+  Elephant(String name, int energyLevel, int hungryLevel) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
-    super.x = x;
-    super.y = y;
   }
   @override
   getName() {
@@ -33,8 +31,8 @@ class Elephant extends Animal implements Herbivores {
   // ignore: non_constant_identifier_names
   List distance() {
     var random = Random();
-    int r1 = random.nextInt(x!) + 5;
-    int r2 = random.nextInt(y!) + 5;
+    int r1 = random.nextInt(20) + 5;
+    int r2 = random.nextInt(20) + 5;
 
     List<int> list_dis = [r1, r2];
     return list_dis;

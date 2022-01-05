@@ -7,8 +7,6 @@ abstract class Animal {
   String? name;
   int? energyLevel;
   int? hungryLevel;
-  int? x;
-  int? y;
   bool isFight = true;
   bool isAlive = true;
   eat();
@@ -24,7 +22,5 @@ abstract class Animal {
   escapeHerb() {}
 
   // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-  Animal fightCarnivores(Animal ani) {
-    return ani;
-  }
+  fightCarnivores(Animal ani) {}
 }

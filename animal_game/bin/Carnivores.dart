@@ -5,6 +5,6 @@ import 'animal.dart';
 class Carnivores {
 //  void animalEat();
   bool? fightAnimals() {}
-  Animal? fightCarnivores(Animal ani) {}
+  fightCarnivores(Animal ani) {}
   bool isFight = true;
 }
