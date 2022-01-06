@@ -52,4 +52,11 @@ class Elephant extends Animal implements Herbivores {
     // ignore: dead_code
     print('$name got luck and it ran away!!!!!');
   }
+
+  @override
+  int vision() {
+    var random = Random();
+    int v1 = random.nextInt(15) + 5;
+    return v1;
+  }
 }

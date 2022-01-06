@@ -23,4 +23,5 @@ abstract class Animal {
 
   // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
   fightCarnivores(Animal ani) {}
+  int? vision() {}
 }

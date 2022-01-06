@@ -29,7 +29,7 @@ class Rabbit extends Animal implements Herbivores {
 
   @override
   List distance() {
-    var random = new Random();
+    var random = Random();
     int r1 = random.nextInt(15) + 5;
     int r2 = random.nextInt(15) + 5;
 
@@ -49,5 +49,12 @@ class Rabbit extends Animal implements Herbivores {
     //throw UnimplementedError();
     // ignore: dead_code
     print('$name got luck and it ran away!!!!!');
+  }
+
+  @override
+  int vision() {
+    var random = Random();
+    int v1 = random.nextInt(15) + 5;
+    return v1;
   }
 }

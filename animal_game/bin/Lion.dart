@@ -57,4 +57,11 @@ class Lion extends Animal implements Carnivores {
     //       '***********************************${ani.name} is ran away from $name');
     // }
   }
+
+  @override
+  int vision() {
+    var random = Random();
+    int v1 = random.nextInt(15) + 5;
+    return v1;
+  }
 }

@@ -101,7 +101,8 @@ class Forest {
       } else if (an2 is Herbivores && an2.luckFact() > 15) {
         an2.escapeHerb();
       } else {
-        arrangeFight(an1, an2);
+        //arrangeFight(an1, an2);
+        meet(an1, an2);
       }
     } else {
       print('\n\t*******${an1.name} far from ${an2.name}');
@@ -110,11 +111,25 @@ class Forest {
 
   //
   //
+  //
+  void meet(Animal an1, Animal an2) {
+    if (an1.vision()! >= an2.vision()! && an1 is Carnivores) {
+      print(
+          '${an1.name} *********************see********************* ${an2.name}');
+      arrangeFight(an1, an2);
+    } else if (an2.vision()! >= an1.vision()! && an2 is Carnivores) {
+      print(
+          '${an2.name}************************** see*********************** ${an1.name}');
+      arrangeFight(an1, an2);
+    }
+  }
+  //
+  //
   //set fight
 
   void arrangeFight(Animal a1, Animal a2) {
     if (a1.isAlive == true && a2.isAlive == true) {
-      print('\n${a1.name}- \tmeet\t ${a2.name}-\n');
+      // print('\n${a1.name}- \tmeet\t ${a2.name}-\n');
       if (a1.fightAnimals() == true || a2.fightAnimals() == true) {
         print('\n\t*****Fight begins*****');
         if (a1 is Carnivores && a1.fightAnimals() == true) {
@@ -158,7 +173,8 @@ class Forest {
     for (int i = 0; i < animalList.length; i++) {
       if (animalList[i] is Carnivores &&
           animalList[i].isAlive == true &&
-          animalList[i].fightAnimals() == true) {
+          animalList[i].fightAnimals() == true &&
+          animalList[i].energyLevel! > 5) {
         x++;
         win = i;
       }
