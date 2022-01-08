@@ -40,15 +40,14 @@ class Tiger extends Animal implements Carnivores {
 
   @override
   fightCarnivores(Animal ani) {
-    if (energyLevel! > ani.energyLevel! && hungryLevel! > ani.hungryLevel!) {
+    if (energyLevel! >= ani.energyLevel! || hungryLevel! >= ani.hungryLevel!) {
       print('***********************************$name is the winner');
       energyLevel = energyLevel! - 5;
       hungryLevel = hungryLevel! - 5;
       if (energyLevel! <= 0) {
         isAlive == false;
       }
-    } else if (ani is Carnivores &&
-        ani.energyLevel! > energyLevel! &&
+    } else if (ani is Carnivores && ani.energyLevel! > energyLevel! ||
         ani.hungryLevel! > hungryLevel!) {
       print('***********************************${ani.name} is the winner');
     }

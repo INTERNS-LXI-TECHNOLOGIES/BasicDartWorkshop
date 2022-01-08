@@ -50,7 +50,7 @@ class Elephant extends Animal implements Herbivores {
     // TODO: implement herbEscape
     //throw UnimplementedError();
     // ignore: dead_code
-    print('$name got luck and it ran away!!!!!');
+    print('$name  ran away!!!!!');
   }
 
   @override
@@ -58,5 +58,11 @@ class Elephant extends Animal implements Herbivores {
     var random = Random();
     int v1 = random.nextInt(15) + 5;
     return v1;
+  }
+
+  int defendsHerb() {
+    var random = Random();
+    int d1 = random.nextInt(energyLevel!);
+    return d1;
   }
 }

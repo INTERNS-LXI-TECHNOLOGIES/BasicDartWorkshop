@@ -94,12 +94,30 @@ class Forest {
   //
   //activities of animals
   void actions(Animal an1, Animal an2, int r) {
-    if (r > 2) {
+    if (r > 2 && an1.isAlive == true && an2.isAlive == true) {
       print('\n\t*******${an1.name} & ${an2.name} are in the range');
-      if (an1 is Herbivores && an1.luckFact() > 15) {
-        an1.escapeHerb();
-      } else if (an2 is Herbivores && an2.luckFact() > 15) {
-        an2.escapeHerb();
+      if (an1 is Herbivores) {
+        int? l = (an1.defendsHerb()! + an1.luckFact()) as int?;
+        if (l! > 40) {
+          print('\n${an1.name} is got shield');
+          an1.escapeHerb();
+        } else {
+          meet(an1, an2);
+        }
+      } else if (an2 is Herbivores) {
+        int? l = (an2.defendsHerb()! + an2.luckFact()) as int?;
+        if (l! > 30) {
+          print('\n${an2.name} is got shield');
+          an2.escapeHerb();
+        } else {
+          meet(an1, an2);
+        }
+      } else if (an1 is Herbivores && an2 is Herbivores) {
+        int? l = (an1.defendsHerb()! + an1.luckFact()) as int?;
+        if (l! > 30) {
+          print('\n${an1.name} is got shield');
+          an1.escapeHerb();
+        }
       } else {
         //arrangeFight(an1, an2);
         meet(an1, an2);
@@ -115,11 +133,19 @@ class Forest {
   void meet(Animal an1, Animal an2) {
     if (an1.vision()! >= an2.vision()! && an1 is Carnivores) {
       print(
-          '${an1.name} *********************see********************* ${an2.name}');
+          '\n${an1.name} *********************see********************* ${an2.name}');
       arrangeFight(an1, an2);
     } else if (an2.vision()! >= an1.vision()! && an2 is Carnivores) {
       print(
-          '${an2.name}************************** see*********************** ${an1.name}');
+          '\n${an2.name}************************** see*********************** ${an1.name}');
+      arrangeFight(an1, an2);
+    } else if (an1.vision()! >= an2.vision()! &&
+        an1 is Carnivores &&
+        an2 is Carnivores) {
+      print(
+          '\n${an1.name} *********************see********************* ${an2.name}');
+      arrangeFight(an1, an2);
+    } else {
       arrangeFight(an1, an2);
     }
   }
@@ -129,7 +155,7 @@ class Forest {
 
   void arrangeFight(Animal a1, Animal a2) {
     if (a1.isAlive == true && a2.isAlive == true) {
-      // print('\n${a1.name}- \tmeet\t ${a2.name}-\n');
+      //
       if (a1.fightAnimals() == true || a2.fightAnimals() == true) {
         print('\n\t*****Fight begins*****');
         if (a1 is Carnivores && a1.fightAnimals() == true) {
@@ -160,6 +186,12 @@ class Forest {
         print('\n******they are friends*****\n');
       }
       winner();
+    } else if (a1.isAlive == false) {
+      print('${a1.name} is dead');
+    } else if (a2.isAlive == false) {
+      print('${a2.name} is dead');
+    } else {
+      print('oooooooppppppppppssssssssss');
     }
   }
 
