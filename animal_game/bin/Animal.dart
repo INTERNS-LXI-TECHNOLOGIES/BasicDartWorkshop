@@ -8,6 +8,7 @@ abstract class Animal {
   int? energyLevel;
   int? hungryLevel;
   int? speed;
+  int? vision;
   bool isFight = true;
   bool isAlive = true;
   eat();
@@ -24,7 +25,6 @@ abstract class Animal {
 
   // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
   fightCarnivores(Animal ani) {}
-  int? vision() {}
 
   void defendsHerb(int d) {}
 }

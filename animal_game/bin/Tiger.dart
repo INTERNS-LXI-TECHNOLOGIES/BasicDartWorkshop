@@ -6,11 +6,12 @@ import 'animal.dart';
 import 'carnivores.dart';
 
 class Tiger extends Animal implements Carnivores {
-  Tiger(String name, int energyLevel, int hungryLevel, int speed) {
+  Tiger(String name, int energyLevel, int hungryLevel, int speed, int vision) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
-    super.speed;
+    super.speed = speed;
+    super.vision = vision;
   }
 
   @override
@@ -56,12 +57,5 @@ class Tiger extends Animal implements Carnivores {
     //   print(
     //       '***********************************${ani.name} is ran away from $name');
     // }
-  }
-
-  @override
-  int vision() {
-    var random = Random();
-    int v1 = random.nextInt(15) + 5;
-    return v1;
   }
 }

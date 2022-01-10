@@ -13,43 +13,30 @@ import 'tiger.dart';
 class Forest {
   //Animals in the forest
   List<Animal> animalList = [];
-  Tiger t1 =
-      Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65), mathRandom(30));
-  Elephant e1 = Elephant(
-      'pambadi rajan', mathRandom(35) + 15, mathRandom(70), mathRandom(25));
-  Rabbit r1 = Rabbit(
-      'kuttu the rabbit', mathRandom(20) + 10, mathRandom(30), mathRandom(20));
-  Lion l1 =
-      Lion('lion king', mathRandom(55) + 20, mathRandom(80), mathRandom(30));
-//
   generateAnimals() {
-    animalList.add(t1);
-    animalList.add(l1);
-    animalList.add(e1);
-    animalList.add(r1);
+    animalList.add(Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65),
+        mathRandom(30), mathRandom(20) + 5));
+    animalList.add(Elephant('pambadi rajan', mathRandom(35) + 15,
+        mathRandom(70), mathRandom(25), mathRandom(20) + 3));
+    animalList.add(Rabbit('kuttu the rabbit', mathRandom(20) + 10,
+        mathRandom(30), mathRandom(20), mathRandom(20) + 1));
+    animalList.add(Lion('lion king', mathRandom(55) + 20, mathRandom(80),
+        mathRandom(30), mathRandom(20) + 5));
   }
 //
 //Animal deatails
 
-  void printDeatails() {
+  void printDetails() {
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
     for (int i = 0; i < animalList.length; i++) {
       animalList[i].getName();
       animalList[i].eat();
       print('\n**');
     }
-    selectAnimals();
   }
 
 //
 //
-//
-//
-
-  List animal_list() {
-    return animalList;
-  }
-
 //
 //
 //
@@ -92,9 +79,9 @@ class Forest {
     int r = ((anList1![0] - anList2![0]) ^ 2 + (anList1[1] - anList2[1]) ^ 2);
     return r;
   }
-  //
-  //
 
+  //
+  //
   //
   //activities of animals
   void actions(Animal an1, Animal an2, int r) {
@@ -136,15 +123,17 @@ class Forest {
   //
   //
   void meet(Animal an1, Animal an2) {
-    if (an1.vision()! >= an2.vision()! && an1 is Carnivores) {
+    print(an1.vision);
+    print(an2.vision);
+    if (an1.vision! >= an2.vision! && an1 is Carnivores) {
       print(
           '\n${an1.name} *********************see********************* ${an2.name}');
       arrangeFight(an1, an2);
-    } else if (an2.vision()! >= an1.vision()! && an2 is Carnivores) {
+    } else if (an2.vision! >= an1.vision! && an2 is Carnivores) {
       print(
           '\n${an2.name}************************** see*********************** ${an1.name}');
       arrangeFight(an1, an2);
-    } else if (an1.vision()! >= an2.vision()! &&
+    } else if (an1.vision! >= an2.vision! &&
         an1 is Carnivores &&
         an2 is Carnivores) {
       print(
@@ -190,7 +179,7 @@ class Forest {
       } else {
         print('\n******they are friends*****\n');
       }
-      winner();
+      winnerAnimal();
     } else if (a1.isAlive == false) {
       print('${a1.name} is dead');
     } else if (a2.isAlive == false) {
@@ -205,7 +194,7 @@ class Forest {
 //
 //
 //Pickup the orginal winner
-  void winner() {
+  void winnerAnimal() {
     int x = 0, win = 0;
     for (int i = 0; i < animalList.length; i++) {
       if (animalList[i] is Carnivores &&
