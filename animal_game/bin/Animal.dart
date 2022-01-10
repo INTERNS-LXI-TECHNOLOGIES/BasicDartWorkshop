@@ -7,6 +7,7 @@ abstract class Animal {
   String? name;
   int? energyLevel;
   int? hungryLevel;
+  int? speed;
   bool isFight = true;
   bool isAlive = true;
   eat();
@@ -25,5 +26,5 @@ abstract class Animal {
   fightCarnivores(Animal ani) {}
   int? vision() {}
 
-  int? defendsHerb() {}
+  void defendsHerb(int d) {}
 }

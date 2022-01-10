@@ -13,10 +13,14 @@ import 'tiger.dart';
 class Forest {
   //Animals in the forest
   List<Animal> animalList = [];
-  Tiger t1 = Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65));
-  Elephant e1 = Elephant('pambadi rajan', mathRandom(35) + 15, mathRandom(70));
-  Rabbit r1 = Rabbit('kuttu the rabbit', mathRandom(20) + 10, mathRandom(30));
-  Lion l1 = Lion('lion king', mathRandom(55) + 20, mathRandom(80));
+  Tiger t1 =
+      Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65), mathRandom(30));
+  Elephant e1 = Elephant(
+      'pambadi rajan', mathRandom(35) + 15, mathRandom(70), mathRandom(25));
+  Rabbit r1 = Rabbit(
+      'kuttu the rabbit', mathRandom(20) + 10, mathRandom(30), mathRandom(20));
+  Lion l1 =
+      Lion('lion king', mathRandom(55) + 20, mathRandom(80), mathRandom(30));
 //
   generateAnimals() {
     animalList.add(t1);
@@ -97,25 +101,26 @@ class Forest {
     if (r > 2 && an1.isAlive == true && an2.isAlive == true) {
       print('\n\t*******${an1.name} & ${an2.name} are in the range');
       if (an1 is Herbivores) {
-        int? l = (an1.defendsHerb()! + an1.luckFact()) as int?;
-        if (l! > 40) {
-          print('\n${an1.name} is got shield');
+        int? l = (an1.luckFact()) as int;
+        if (l > 30) {
+          an1.defendsHerb(l);
           an1.escapeHerb();
         } else {
           meet(an1, an2);
         }
       } else if (an2 is Herbivores) {
-        int? l = (an2.defendsHerb()! + an2.luckFact()) as int?;
-        if (l! > 30) {
-          print('\n${an2.name} is got shield');
+        // ignore: unnecessary_cast
+        int? l = (an2.luckFact()) as int;
+        if (l > 30) {
+          an2.defendsHerb(l);
           an2.escapeHerb();
         } else {
           meet(an1, an2);
         }
       } else if (an1 is Herbivores && an2 is Herbivores) {
-        int? l = (an1.defendsHerb()! + an1.luckFact()) as int?;
+        int? l = (an1.luckFact()) as int?;
         if (l! > 30) {
-          print('\n${an1.name} is got shield');
+          an1.defendsHerb(l);
           an1.escapeHerb();
         }
       } else {

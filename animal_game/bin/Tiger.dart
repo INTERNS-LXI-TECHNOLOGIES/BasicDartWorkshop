@@ -6,10 +6,11 @@ import 'animal.dart';
 import 'carnivores.dart';
 
 class Tiger extends Animal implements Carnivores {
-  Tiger(String name, int energyLevel, int hungryLevel) {
+  Tiger(String name, int energyLevel, int hungryLevel, int speed) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
+    super.speed;
   }
 
   @override
