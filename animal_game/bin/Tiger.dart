@@ -22,7 +22,6 @@ class Tiger extends Animal implements Carnivores {
   @override
   eat() {
     print('$name  eat meat');
-    //print("tigerdemo");
   }
 
   bool fightAnimals() {
@@ -31,7 +30,7 @@ class Tiger extends Animal implements Carnivores {
   }
 
   @override
-  List distance() {
+  List roam() {
     var random = Random();
     int r1 = random.nextInt(30) + 5;
     int r2 = random.nextInt(30) + 5;
@@ -53,9 +52,5 @@ class Tiger extends Animal implements Carnivores {
         ani.hungryLevel! > hungryLevel!) {
       print('***********************************${ani.name} is the winner');
     }
-    // else {
-    //   print(
-    //       '***********************************${ani.name} is ran away from $name');
-    // }
   }
 }

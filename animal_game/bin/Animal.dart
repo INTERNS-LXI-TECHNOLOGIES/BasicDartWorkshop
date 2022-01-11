@@ -15,7 +15,7 @@ abstract class Animal {
 
   getName() {}
 
-  List? distance();
+  List? roam();
 
   bool? fightAnimals();
 

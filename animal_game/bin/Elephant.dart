@@ -32,7 +32,7 @@ class Elephant extends Animal implements Herbivores {
 
   @override
   // ignore: non_constant_identifier_names
-  List distance() {
+  List roam() {
     var random = Random();
     int r1 = random.nextInt(20) + 5;
     int r2 = random.nextInt(20) + 5;
@@ -50,9 +50,6 @@ class Elephant extends Animal implements Herbivores {
 
   @override
   escapeHerb() {
-    // TODO: implement herbEscape
-    //throw UnimplementedError();
-    // ignore: dead_code
     print('$name  ran away!!!!!');
   }
 

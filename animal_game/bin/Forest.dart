@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unnecessary_new, duplicate_ignore
+// ignore_for_file: file_names, unnecessary_new, duplicate_ignore, unused_local_variable
 
 import 'dart:core';
 import 'dart:math';
@@ -14,6 +14,10 @@ class Forest {
   //Animals in the forest
   List<Animal> animalList = [];
   generateAnimals() {
+    Tiger tiger;
+    Elephant elephant;
+    Rabbit rabbit;
+    Lion lion;
     animalList.add(Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65),
         mathRandom(30), mathRandom(20) + 5));
     animalList.add(Elephant('pambadi rajan', mathRandom(35) + 15,
@@ -35,11 +39,6 @@ class Forest {
     }
   }
 
-//
-//
-//
-//
-//
 //Select  random animals
 
   void selectAnimals() {
@@ -74,18 +73,19 @@ class Forest {
   //
   //Distance b/w animals
   int distance(Animal an1, Animal an2) {
-    List? anList1 = an1.distance();
-    List? anList2 = an2.distance();
-    int r = ((anList1![0] - anList2![0]) ^ 2 + (anList1[1] - anList2[1]) ^ 2);
-    return r;
+    List? anList1 = an1.roam();
+    List? anList2 = an2.roam();
+    int range =
+        ((anList1![0] - anList2![0]) ^ 2 + (anList1[1] - anList2[1]) ^ 2);
+    return range;
   }
 
   //
   //
   //
   //activities of animals
-  void actions(Animal an1, Animal an2, int r) {
-    if (r > 2 && an1.isAlive == true && an2.isAlive == true) {
+  void actions(Animal an1, Animal an2, int range) {
+    if (range > 2 && an1.isAlive == true && an2.isAlive == true) {
       print('\n\t*******${an1.name} & ${an2.name} are in the range');
       if (an1 is Herbivores) {
         int? l = (an1.luckFact()) as int;
@@ -128,26 +128,26 @@ class Forest {
     if (an1.vision! >= an2.vision! && an1 is Carnivores) {
       print(
           '\n${an1.name} *********************see********************* ${an2.name}');
-      arrangeFight(an1, an2);
+      _arrangeFight(an1, an2);
     } else if (an2.vision! >= an1.vision! && an2 is Carnivores) {
       print(
           '\n${an2.name}************************** see*********************** ${an1.name}');
-      arrangeFight(an1, an2);
+      _arrangeFight(an1, an2);
     } else if (an1.vision! >= an2.vision! &&
         an1 is Carnivores &&
         an2 is Carnivores) {
       print(
           '\n${an1.name} *********************see********************* ${an2.name}');
-      arrangeFight(an1, an2);
+      _arrangeFight(an1, an2);
     } else {
-      arrangeFight(an1, an2);
+      _arrangeFight(an1, an2);
     }
   }
   //
   //
   //set fight
 
-  void arrangeFight(Animal a1, Animal a2) {
+  void _arrangeFight(Animal a1, Animal a2) {
     if (a1.isAlive == true && a2.isAlive == true) {
       //
       if (a1.fightAnimals() == true || a2.fightAnimals() == true) {
@@ -179,7 +179,7 @@ class Forest {
       } else {
         print('\n******they are friends*****\n');
       }
-      winnerAnimal();
+      _winnerAnimal();
     } else if (a1.isAlive == false) {
       print('${a1.name} is dead');
     } else if (a2.isAlive == false) {
@@ -194,7 +194,7 @@ class Forest {
 //
 //
 //Pickup the orginal winner
-  void winnerAnimal() {
+  void _winnerAnimal() {
     int x = 0, win = 0;
     for (int i = 0; i < animalList.length; i++) {
       if (animalList[i] is Carnivores &&

@@ -30,7 +30,7 @@ class Lion extends Animal implements Carnivores {
   }
 
   @override
-  List distance() {
+  List roam() {
     // ignore: unnecessary_new
     var random = new Random();
     int r1 = random.nextInt(30) + 5;
@@ -53,9 +53,6 @@ class Lion extends Animal implements Carnivores {
     } else if (ani is Carnivores && ani.energyLevel! > energyLevel! ||
         ani.hungryLevel! > hungryLevel!) {
       print('***********************************${ani.name} is the winner');
-    } // else {
-    //   print(
-    //       '***********************************${ani.name} is ran away from $name');
-    // }
+    }
   }
 }
