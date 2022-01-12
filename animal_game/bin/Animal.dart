@@ -9,6 +9,7 @@ abstract class Animal {
   int? hungryLevel;
   int? speed;
   int? vision;
+  int? distance;
   bool isFight = true;
   bool isAlive = true;
   eat();

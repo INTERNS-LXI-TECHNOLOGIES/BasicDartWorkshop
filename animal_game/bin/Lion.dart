@@ -6,12 +6,14 @@ import 'animal.dart';
 import 'carnivores.dart';
 
 class Lion extends Animal implements Carnivores {
-  Lion(String name, int energyLevel, int hungryLevel, int speed, int vision) {
+  Lion(String name, int energyLevel, int hungryLevel, int speed, int vision,
+      int distance) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
     super.speed = speed;
     super.vision = vision;
+    super.distance = distance;
   }
   @override
   getName() {

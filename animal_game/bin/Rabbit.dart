@@ -6,12 +6,14 @@ import 'animal.dart';
 import 'herbivores.dart';
 
 class Rabbit extends Animal implements Herbivores {
-  Rabbit(String name, int energyLevel, int hungryLevel, int speed, int vision) {
+  Rabbit(String name, int energyLevel, int hungryLevel, int speed, int vision,
+      int distance) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
     super.speed = speed;
     super.vision = vision;
+    super.distance = distance;
   }
   @override
   getName() {
@@ -50,8 +52,9 @@ class Rabbit extends Animal implements Herbivores {
     print('$name  ran away!!!!!');
   }
 
-  void defendsHerb(int d) {
-    if (speed! > d) {
+  @override
+  void defendsHerb(int distance) {
+    if (speed! > distance) {
       print('$name get shield');
     } else {
       print('$name not get shield');
