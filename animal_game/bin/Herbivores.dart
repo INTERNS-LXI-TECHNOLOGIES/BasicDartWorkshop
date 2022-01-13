@@ -4,6 +4,7 @@ class Herbivores {
 //  void animalEat();
   int? luckFact() {}
   escapeHerb() {}
-  void defendsHerb(int d) {}
+  void defendsHerb(int distance) {}
   bool isFight = false;
+  graze(int x, int y) {}
 }

@@ -15,6 +15,7 @@ class Elephant extends Animal implements Herbivores {
     super.vision = vision;
     super.distance = distance;
   }
+
   @override
   getName() {
     print(name);
@@ -33,19 +34,17 @@ class Elephant extends Animal implements Herbivores {
 
   @override
   // ignore: non_constant_identifier_names
-  List roam() {
+  graze(int x, int y) {
     var random = Random();
-    int r1 = random.nextInt(20) + 5;
-    int r2 = random.nextInt(20) + 5;
-
-    List<int> list_dis = [r1, r2];
-    return list_dis;
+    int? position1, position2;
+    position1 = random.nextInt(x) + 5;
+    position2 = random.nextInt(y) + 5;
   }
 
   @override
   int luckFact() {
     var random = Random();
-    int luck = random.nextInt(20) + 1;
+    int luck = random.nextInt(30) + 1;
     return luck;
   }
 

@@ -32,15 +32,11 @@ class Lion extends Animal implements Carnivores {
   }
 
   @override
-  List roam() {
-    // ignore: unnecessary_new
+  roam(int x, int y) {
     var random = new Random();
-    int r1 = random.nextInt(30) + 5;
-    int r2 = random.nextInt(30) + 5;
-
-    // ignore: non_constant_identifier_names
-    List<int> list_dis = [r1, r2];
-    return list_dis;
+    int? position1, position2;
+    position1 = random.nextInt(x) + 5;
+    position2 = random.nextInt(y) + 5;
   }
 
   @override

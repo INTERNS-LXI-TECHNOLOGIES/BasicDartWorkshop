@@ -16,16 +16,7 @@ abstract class Animal {
 
   getName() {}
 
-  List? roam();
-
   bool? fightAnimals();
 
   luckFact() {}
-
-  escapeHerb() {}
-
-  // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-  fightCarnivores(Animal ani) {}
-
-  void defendsHerb(int d) {}
 }
