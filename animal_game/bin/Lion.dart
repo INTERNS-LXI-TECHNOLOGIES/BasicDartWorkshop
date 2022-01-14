@@ -21,13 +21,15 @@ class Lion extends Animal implements Carnivores {
     super.vision = vision;
   }
 
+  Location homeLocation = Location(20, 20);
+  Location roamLocation = Location(20, 20);
+  @override
+  Location currentLocation = Location(20, 20);
   @override
   List getLocation() {
-    Location location =
-        Location(random.nextInt(20) + 2, random.nextInt(20) + 2);
     List<int> loclist = [];
-    loclist.add(location.x!);
-    loclist.add(location.y!);
+    loclist.add(roamLocation.x!);
+    loclist.add(roamLocation.y!);
     return loclist;
   }
 
@@ -48,12 +50,6 @@ class Lion extends Animal implements Carnivores {
   }
 
   var random = new Random();
-  @override
-  roam(int x, int y) {
-    int? position1, position2;
-    position1 = random.nextInt(x) + 5;
-    position2 = random.nextInt(y) + 5;
-  }
 
   @override
   fightCarnivores(Animal ani) {
@@ -68,5 +64,10 @@ class Lion extends Animal implements Carnivores {
         ani.hungryLevel! > hungryLevel!) {
       print('***********************************${ani.name} is the winner');
     }
+  }
+
+  @override
+  changeCurrentLocation(int x, int y) {
+    currentLocation = Location(x, y);
   }
 }

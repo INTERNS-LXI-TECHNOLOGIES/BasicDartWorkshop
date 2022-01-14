@@ -6,5 +6,4 @@ class Herbivores {
   escapeHerb() {}
   void defendsHerb(int distance) {}
   bool isFight = false;
-  graze(int x, int y) {}
 }

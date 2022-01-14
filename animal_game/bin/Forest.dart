@@ -92,14 +92,14 @@ class Forest {
   //
   //activities of animals
   void _checkFight(Animal animal1, Animal animal2, int range) {
-    if (range > 1 && animal1.isAlive == true && animal2.isAlive == true) {
+    if (range > 5 && animal1.isAlive == true && animal2.isAlive == true) {
       print('\n\t*******${animal1.name} & ${animal2.name} are in the range');
       if (animal1 is Herbivores) {
         int? l = (animal1.luckFact()) as int;
         if (l > 20) {
           (animal1 as Herbivores).defendsHerb(l);
           (animal1 as Herbivores).escapeHerb();
-          _changeLocation();
+          _changeCurrentLocation();
         } else {
           _arrangeFight(animal1, animal2);
         }
@@ -109,7 +109,7 @@ class Forest {
         if (l > 20) {
           (animal2 as Herbivores).defendsHerb(l);
           (animal2 as Herbivores).escapeHerb();
-          _changeLocation();
+          _changeCurrentLocation();
         } else {
           _arrangeFight(animal1, animal2);
         }
@@ -118,7 +118,7 @@ class Forest {
         if (l! > 20) {
           (animal1 as Herbivores).defendsHerb(l);
           (animal1 as Herbivores).escapeHerb();
-          _changeLocation();
+          _changeCurrentLocation();
         }
       } else {
         _arrangeFight(animal1, animal2);
@@ -139,7 +139,7 @@ class Forest {
             animal1.fightAnimals() == true &&
             animal1.vision! >= animal2.vision!) {
           (animal1 as Carnivores).fightCarnivores(animal2);
-          _changeLocation();
+          _changeCurrentLocation();
           animal2.energyLevel = animal2.energyLevel! - 10;
           animal2.hungryLevel = animal2.hungryLevel! - 10;
           if (animal2.energyLevel! <= 0) {
@@ -152,7 +152,7 @@ class Forest {
             animal2.fightAnimals() == true &&
             animal2.vision! >= animal1.vision!) {
           (animal2 as Carnivores).fightCarnivores(animal1);
-          _changeLocation();
+          _changeCurrentLocation();
           animal1.energyLevel = animal1.energyLevel! - 10;
           animal1.hungryLevel = animal1.hungryLevel! - 10;
           if (animal1.energyLevel! <= 0) {
@@ -165,7 +165,7 @@ class Forest {
             animal2 is Carnivores &&
             animal1.vision! >= animal2.vision!) {
           (animal1 as Carnivores).fightCarnivores(animal2);
-          _changeLocation();
+          _changeCurrentLocation();
           animal2.energyLevel = animal2.energyLevel! - 10;
           animal2.hungryLevel = animal2.hungryLevel! - 10;
           if (animal2.energyLevel! <= 0) {
@@ -206,14 +206,11 @@ class Forest {
     }
   }
 
-  _changeLocation() {
+  _changeCurrentLocation() {
     for (int i = 0; i < animalList.length; i++) {
-      if (animalList[i] is Carnivores && animalList[i].isAlive == true) {
-        (animalList[i] as Carnivores)
-            .roam(mathRandom(30) + 2, mathRandom(30) + 2);
-      } else if (animalList[i] is Herbivores && animalList[i].isAlive == true) {
-        (animalList[i] as Herbivores)
-            .graze(mathRandom(20) + 2, mathRandom(20) + 2);
+      if (animalList[i].isAlive == true) {
+        animalList[i]
+            .changeCurrentLocation(mathRandom(30) + 2, mathRandom(30) + 2);
       }
     }
   }

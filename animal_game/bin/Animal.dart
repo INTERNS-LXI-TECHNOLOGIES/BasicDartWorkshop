@@ -2,6 +2,7 @@
 
 import 'carnivores.dart';
 import 'herbivores.dart';
+import 'location.dart';
 
 abstract class Animal {
   String? name;
@@ -12,6 +13,8 @@ abstract class Animal {
   int? distance;
   bool isFight = true;
   bool isAlive = true;
+  Location currentLocation = Location(2, 2);
+
   eat();
 
   getName() {}
@@ -20,4 +23,5 @@ abstract class Animal {
 
   luckFact() {}
   List? getLocation() {}
+  changeCurrentLocation(int x, int y) {}
 }

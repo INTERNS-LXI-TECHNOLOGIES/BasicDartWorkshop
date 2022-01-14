@@ -7,5 +7,4 @@ class Carnivores {
   bool? fightAnimals() {}
   fightCarnivores(Animal ani) {}
   bool isFight = true;
-  roam(int x, int y) {}
 }

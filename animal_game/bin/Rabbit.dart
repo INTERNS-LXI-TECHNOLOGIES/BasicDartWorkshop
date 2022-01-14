@@ -21,13 +21,15 @@ class Rabbit extends Animal implements Herbivores {
     super.vision = vision;
   }
 
+  Location homeLocation = Location(20, 20);
+  Location grazeLocation = Location(20, 20);
+  @override
+  Location currentLocation = Location(20, 20);
   @override
   List getLocation() {
-    Location location =
-        Location(random.nextInt(20) + 2, random.nextInt(20) + 2);
     List<int> loclist = [];
-    loclist.add(location.x!);
-    loclist.add(location.y!);
+    loclist.add(grazeLocation.x!);
+    loclist.add(grazeLocation.y!);
     return loclist;
   }
 
@@ -49,14 +51,7 @@ class Rabbit extends Animal implements Herbivores {
 
   var random = Random();
   @override
-  graze(int x, int y) {
-    int? position1, position2;
-    position1 = random.nextInt(x) + 5;
-    position2 = random.nextInt(y) + 5;
-  }
-
   int luckFact() {
-    var random = Random();
     int luck = random.nextInt(30) + 1;
     return luck;
   }
@@ -73,5 +68,10 @@ class Rabbit extends Animal implements Herbivores {
     } else {
       print('$name not get shield');
     }
+  }
+
+  @override
+  changeCurrentLocation(int x, int y) {
+    currentLocation = Location(x, y);
   }
 }
