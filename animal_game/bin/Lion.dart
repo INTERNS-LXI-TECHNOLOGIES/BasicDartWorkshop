@@ -4,17 +4,33 @@ import 'dart:io';
 import 'dart:math';
 import 'animal.dart';
 import 'carnivores.dart';
+import 'location.dart';
 
 class Lion extends Animal implements Carnivores {
-  Lion(String name, int energyLevel, int hungryLevel, int speed, int vision,
-      int distance) {
+  Lion(
+    String name,
+    int energyLevel,
+    int hungryLevel,
+    int speed,
+    int vision,
+  ) {
     super.name = name;
     super.energyLevel = energyLevel;
     super.hungryLevel = hungryLevel;
     super.speed = speed;
     super.vision = vision;
-    super.distance = distance;
   }
+
+  @override
+  List getLocation() {
+    Location location =
+        Location(random.nextInt(20) + 2, random.nextInt(20) + 2);
+    List<int> loclist = [];
+    loclist.add(location.x!);
+    loclist.add(location.y!);
+    return loclist;
+  }
+
   @override
   getName() {
     print(name);
@@ -31,9 +47,9 @@ class Lion extends Animal implements Carnivores {
     return isFight;
   }
 
+  var random = new Random();
   @override
   roam(int x, int y) {
-    var random = new Random();
     int? position1, position2;
     position1 = random.nextInt(x) + 5;
     position2 = random.nextInt(y) + 5;

@@ -19,4 +19,5 @@ abstract class Animal {
   bool? fightAnimals();
 
   luckFact() {}
+  List? getLocation() {}
 }

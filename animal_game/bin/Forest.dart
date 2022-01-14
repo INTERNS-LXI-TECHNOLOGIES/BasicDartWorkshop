@@ -16,13 +16,13 @@ class Forest {
   //Animals in the forest
   generateAnimals() {
     Tiger tiger = Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65),
-        mathRandom(30), mathRandom(20) + 5, mathRandom(40));
+        mathRandom(30), mathRandom(20) + 5);
     Elephant elephant = Elephant('pambadi rajan', mathRandom(35) + 15,
-        mathRandom(70), mathRandom(25), mathRandom(20) + 3, mathRandom(30));
+        mathRandom(70), mathRandom(25), mathRandom(20) + 3);
     Rabbit rabbit = Rabbit('kuttu the rabbit', mathRandom(20) + 10,
-        mathRandom(30), mathRandom(20), mathRandom(20) + 1, mathRandom(20));
+        mathRandom(30), mathRandom(20), mathRandom(20) + 1);
     Lion lion = Lion('lion king', mathRandom(55) + 20, mathRandom(80),
-        mathRandom(30), mathRandom(20) + 5, mathRandom(40));
+        mathRandom(30), mathRandom(20) + 5);
     animalList.add(tiger);
     animalList.add(elephant);
     animalList.add(rabbit);
@@ -33,6 +33,7 @@ class Forest {
 
   void printDetails() {
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
+
     for (int i = 0; i < animalList.length; i++) {
       animalList[i].getName();
       animalList[i].eat();
@@ -72,10 +73,17 @@ class Forest {
 
   //
   //
+  //
+  //
+  //
+  //
   //Distance b/w animals
   int _calculateDistance(Animal animal1, Animal animal2) {
-    int range = (animal1.distance! ^ 2 - animal2.distance! ^ 2) * -1;
-    //print(range);
+    List? listanim1 = animal1.getLocation();
+    List? listanim2 = animal2.getLocation();
+    int range = ((listanim1![0] - listanim2![0]) ^
+        2 + (listanim1[0]! - listanim2[1]!) ^
+        2);
     return range;
   }
 
@@ -84,7 +92,7 @@ class Forest {
   //
   //activities of animals
   void _checkFight(Animal animal1, Animal animal2, int range) {
-    if (range > 25 && animal1.isAlive == true && animal2.isAlive == true) {
+    if (range > 1 && animal1.isAlive == true && animal2.isAlive == true) {
       print('\n\t*******${animal1.name} & ${animal2.name} are in the range');
       if (animal1 is Herbivores) {
         int? l = (animal1.luckFact()) as int;
