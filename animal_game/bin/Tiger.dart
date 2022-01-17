@@ -20,8 +20,8 @@ class Tiger extends Animal implements Carnivores {
     super.speed = speed;
     super.vision = vision;
   }
-  Location homeLocation = Location(20, 20);
-  Location roamLocation = Location(20, 20);
+  Location homeLocation = Location(40, 40);
+  Location roamLocation = Location(30, 30);
   Location currentLocation = Location(20, 20);
   @override
   List getLocation() {

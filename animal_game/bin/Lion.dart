@@ -21,9 +21,12 @@ class Lion extends Animal implements Carnivores {
     super.vision = vision;
   }
 
-  Location homeLocation = Location(20, 20);
-  Location roamLocation = Location(20, 20);
   @override
+  Location homeLocation = Location(40, 40);
+  @override
+  Location roamLocation = Location(30, 30);
+  @override
+  // ignore: overridden_fields
   Location currentLocation = Location(20, 20);
   @override
   List getLocation() {

@@ -28,9 +28,8 @@ class Forest {
     animalList.add(rabbit);
     animalList.add(lion);
   }
-//
-//Animal deatails
 
+//Animal deatails
   void printDetails() {
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
 
@@ -65,39 +64,31 @@ class Forest {
             x == y ||
             animalList[x].isAlive == false ||
             animalList[y].isAlive == false);
-        int d = _calculateDistance(animalList[x], animalList[y]);
-        _checkFight(animalList[x], animalList[y], d);
+        int range = _calculateDistance(animalList[x], animalList[y]);
+        _checkFight(animalList[x], animalList[y], range);
       }
     } while (w != 1);
   }
 
-  //
-  //
-  //
-  //
-  //
-  //
   //Distance b/w animals
   int _calculateDistance(Animal animal1, Animal animal2) {
     List? listanim1 = animal1.getLocation();
     List? listanim2 = animal2.getLocation();
     int range = ((listanim1![0] - listanim2![0]) ^
-        2 + (listanim1[0]! - listanim2[1]!) ^
-        2);
+            2 + (listanim1[0]! - listanim2[1]!) ^
+            2) +
+        2;
     return range;
   }
 
-  //
-  //
-  //
   //activities of animals
   void _checkFight(Animal animal1, Animal animal2, int range) {
     if (range > 5 && animal1.isAlive == true && animal2.isAlive == true) {
       print('\n\t*******${animal1.name} & ${animal2.name} are in the range');
       if (animal1 is Herbivores) {
-        int? l = (animal1.luckFact()) as int;
-        if (l > 20) {
-          (animal1 as Herbivores).defendsHerb(l);
+        int? luck1 = ((animal1 as Herbivores).luckFact()) as int;
+        if (luck1 > 20) {
+          (animal1 as Herbivores).defendsHerb(luck1);
           (animal1 as Herbivores).escapeHerb();
           _changeCurrentLocation();
         } else {
@@ -183,11 +174,7 @@ class Forest {
     }
   }
 
-//
-
-//
-//
-//Pickup the orginal winner
+//Pickup the ultimate winner
   void _winnerAnimal() {
     int x = 0, win = 0;
     for (int i = 0; i < animalList.length; i++) {
@@ -216,10 +203,6 @@ class Forest {
   }
 }
 
-//
-//
-//
-//
 int mathRandom(int a) {
   var random = new Random();
   int r = random.nextInt(a);

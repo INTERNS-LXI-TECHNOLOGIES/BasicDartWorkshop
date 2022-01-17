@@ -21,7 +21,9 @@ class Elephant extends Animal implements Herbivores {
     super.vision = vision;
   }
 
+  @override
   Location homeLocation = Location(20, 20);
+  @override
   Location grazeLocation = Location(20, 20);
   @override
   Location currentLocation = Location(20, 20);

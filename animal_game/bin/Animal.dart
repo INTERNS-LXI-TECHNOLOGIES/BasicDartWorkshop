@@ -14,6 +14,7 @@ abstract class Animal {
   bool isFight = true;
   bool isAlive = true;
   Location currentLocation = Location(2, 2);
+  Location homeLocation = Location(2, 2);
 
   eat();
 

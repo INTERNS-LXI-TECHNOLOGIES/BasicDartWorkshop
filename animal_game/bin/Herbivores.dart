@@ -1,7 +1,7 @@
-// ignore_for_file: file_names
+import 'location.dart';
 
 class Herbivores {
-//  void animalEat();
+  Location grazeLocation = Location(2, 2);
   int? luckFact() {}
   escapeHerb() {}
   void defendsHerb(int distance) {}

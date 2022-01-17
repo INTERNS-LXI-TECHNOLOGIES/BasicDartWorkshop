@@ -1,10 +1,9 @@
-// ignore_for_file: file_names
-
 import 'animal.dart';
+import 'location.dart';
 
 class Carnivores {
-//  void animalEat();
+  Location roamLocation = Location(2, 2);
   bool? fightAnimals() {}
-  fightCarnivores(Animal ani) {}
+  fightCarnivores(Animal animal) {}
   bool isFight = true;
 }
