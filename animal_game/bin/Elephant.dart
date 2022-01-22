@@ -28,11 +28,8 @@ class Elephant extends Animal implements Herbivores {
   @override
   Location currentLocation = Location(20, 20);
   @override
-  List getLocation() {
-    List<int> loclist = [];
-    loclist.add(grazeLocation.x!);
-    loclist.add(grazeLocation.y!);
-    return loclist;
+  Location getLocation() {
+    return grazeLocation;
   }
 
   @override
@@ -45,15 +42,8 @@ class Elephant extends Animal implements Herbivores {
     print('$name  eat leaf');
   }
 
-  @override
-  bool fightAnimals() {
-    bool isFight = false;
-    return isFight;
-  }
-
   var random = Random();
-  @override
-  int luckFact() {
+  int _luckFact() {
     int luck = random.nextInt(30) + 1;
     return luck;
   }
@@ -64,11 +54,26 @@ class Elephant extends Animal implements Herbivores {
   }
 
   @override
-  void defendsHerb(int distance) {
-    if (speed! > distance) {
+  bool defendsHerb() {
+    if (_luckFact() > 25) {
       print('$name get shield');
+      escapeHerb();
+      return true;
     } else {
-      print('$name not get shield');
+      // print('$name not get shield');
+      return false;
+    }
+  }
+
+  @override
+  afterFight(bool isWin) {
+    if (isWin == false) {
+      energyLevel = energyLevel! - 10;
+      hungryLevel = hungryLevel! - 10;
+      if (energyLevel! <= 0) {
+        isAlive == false;
+        print('$name is DEAD ');
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_import
+// ignore_for_file: file_names, unused_import, unused_element
 
 import 'carnivores.dart';
 import 'herbivores.dart';
@@ -11,7 +11,6 @@ abstract class Animal {
   int? speed;
   int? vision;
   int? distance;
-  bool isFight = true;
   bool isAlive = true;
   Location currentLocation = Location(2, 2);
   Location homeLocation = Location(2, 2);
@@ -20,9 +19,9 @@ abstract class Animal {
 
   getName() {}
 
-  bool? fightAnimals();
+  _luckFact() {}
+  Location? getLocation() {}
 
-  luckFact() {}
-  List? getLocation() {}
+  afterFight(bool isWin) {}
   changeCurrentLocation(int x, int y) {}
 }

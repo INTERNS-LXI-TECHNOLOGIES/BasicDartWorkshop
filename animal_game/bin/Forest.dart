@@ -1,13 +1,13 @@
 // ignore_for_file: file_names, unnecessary_new, duplicate_ignore, unused_local_variable
 
 import 'dart:core';
-import 'dart:ffi';
 import 'dart:math';
 import 'animal.dart';
 import 'carnivores.dart';
 import 'elephant.dart';
 import 'herbivores.dart';
 import 'lion.dart';
+import 'location.dart';
 import 'rabbit.dart';
 import 'tiger.dart';
 
@@ -16,13 +16,13 @@ class Forest {
   //Animals in the forest
   generateAnimals() {
     Tiger tiger = Tiger('sherkhan', mathRandom(45) + 20, mathRandom(65),
-        mathRandom(30), mathRandom(20) + 5);
+        mathRandom(30), mathRandom(20) + 10);
     Elephant elephant = Elephant('pambadi rajan', mathRandom(35) + 15,
-        mathRandom(70), mathRandom(25), mathRandom(20) + 3);
+        mathRandom(70), mathRandom(25), mathRandom(20) + 5);
     Rabbit rabbit = Rabbit('kuttu the rabbit', mathRandom(20) + 10,
-        mathRandom(30), mathRandom(20), mathRandom(20) + 1);
+        mathRandom(30), mathRandom(20), mathRandom(20) + 3);
     Lion lion = Lion('lion king', mathRandom(55) + 20, mathRandom(80),
-        mathRandom(30), mathRandom(20) + 5);
+        mathRandom(30), mathRandom(20) + 10);
     animalList.add(tiger);
     animalList.add(elephant);
     animalList.add(rabbit);
@@ -31,6 +31,7 @@ class Forest {
 
 //Animal deatails
   void printDetails() {
+    print(animalList[0].currentLocation.x);
     print('\n\n\t*******Dark Forest*******\n\n\t***Animals***\n');
 
     for (int i = 0; i < animalList.length; i++) {
@@ -42,76 +43,76 @@ class Forest {
 
 //Select  random animals
 
-  void selectAnimals() {
-    int w = 0;
+  void randomFightAnimal() {
+    int count = 0;
     do {
-      w = 0;
+      count = 0;
       for (int i = 0; i < animalList.length; i++) {
-        if (animalList[i].isAlive == true &&
-            animalList[i] is Carnivores &&
-            animalList[i].isFight == true) {
-          w++;
+        if (animalList[i].isAlive == true && animalList[i] is Carnivores) {
+          count++;
         }
       }
 
-      if (w != 1) {
-        int x, y;
+      if (count != 1) {
+        int x;
 
         do {
           x = mathRandom(animalList.length);
-          y = mathRandom(animalList.length);
-        } while (animalList[x].isFight == false ||
-            x == y ||
-            animalList[x].isAlive == false ||
-            animalList[y].isAlive == false);
-        int range = _calculateDistance(animalList[x], animalList[y]);
-        _checkFight(animalList[x], animalList[y], range);
+        } while (animalList[x].isAlive == false);
+
+        Animal prey = _minimumRangeAnimal(animalList[x]);
+        if (animalList[x] != prey) {
+          _checkFight(animalList[x], prey);
+        }
       }
-    } while (w != 1);
+    } while (count != 1);
   }
 
-  //Distance b/w animals
-  int _calculateDistance(Animal animal1, Animal animal2) {
-    List? listanim1 = animal1.getLocation();
-    List? listanim2 = animal2.getLocation();
-    int range = ((listanim1![0] - listanim2![0]) ^
-            2 + (listanim1[0]! - listanim2[1]!) ^
-            2) +
-        2;
-    return range;
+  Animal _minimumRangeAnimal(Animal animal) {
+    int range = 10;
+    int newRange = 0;
+    Animal hount = animalList[0];
+
+    for (int i = 0; i < animalList.length; i++) {
+      if (animal != animalList[i] && animal.isAlive == true) {
+        Location? location1 = animal.getLocation();
+        Location? location2 = animalList[i].getLocation();
+        int newRange = (((location1!.x)! - (location2!.x)!) + 1 ^
+            2 + ((location1.y)! - (location2.y)!) + 1 ^
+            2);
+        newRange = newRange.abs();
+
+        if (newRange < range) {
+          range = newRange;
+          hount = animalList[i];
+        } else {
+          newRange = range;
+        }
+      }
+    }
+    return hount;
   }
 
   //activities of animals
-  void _checkFight(Animal animal1, Animal animal2, int range) {
-    if (range > 5 && animal1.isAlive == true && animal2.isAlive == true) {
+  void _checkFight(Animal animal1, Animal animal2) {
+    if (animal1.isAlive == true && animal2.isAlive == true) {
       print('\n\t*******${animal1.name} & ${animal2.name} are in the range');
-      if (animal1 is Herbivores) {
-        int? luck1 = ((animal1 as Herbivores).luckFact()) as int;
-        if (luck1 > 20) {
-          (animal1 as Herbivores).defendsHerb(luck1);
-          (animal1 as Herbivores).escapeHerb();
+      if (animal1 is Herbivores && animal2 is Carnivores) {
+        if ((animal1 as Herbivores).defendsHerb() == true) {
           _changeCurrentLocation();
         } else {
           _arrangeFight(animal1, animal2);
         }
-      } else if (animal2 is Herbivores) {
-        // ignore: unnecessary_cast
-        int? l = (animal2.luckFact()) as int;
-        if (l > 20) {
-          (animal2 as Herbivores).defendsHerb(l);
-          (animal2 as Herbivores).escapeHerb();
+      } else if (animal2 is Herbivores && animal1 is Carnivores) {
+        if ((animal2 as Herbivores).defendsHerb() == true) {
           _changeCurrentLocation();
         } else {
           _arrangeFight(animal1, animal2);
         }
       } else if (animal1 is Herbivores && animal2 is Herbivores) {
-        int? l = (animal1.luckFact()) as int?;
-        if (l! > 20) {
-          (animal1 as Herbivores).defendsHerb(l);
-          (animal1 as Herbivores).escapeHerb();
-          _changeCurrentLocation();
-        }
-      } else {
+        print('they are friends');
+        _changeCurrentLocation();
+      } else if (animal1 is Carnivores && animal2 is Carnivores) {
         _arrangeFight(animal1, animal2);
       }
     } else {
@@ -120,50 +121,41 @@ class Forest {
   }
 
   //set fight
-
   void _arrangeFight(Animal animal1, Animal animal2) {
+    bool isWin;
     if (animal1.isAlive == true && animal2.isAlive == true) {
-      //
-      if (animal1.fightAnimals() == true || animal2.fightAnimals() == true) {
-        print('\n\t*****Fight begins*****');
-        if (animal1 is Carnivores &&
-            animal1.fightAnimals() == true &&
-            animal1.vision! >= animal2.vision!) {
-          (animal1 as Carnivores).fightCarnivores(animal2);
-          _changeCurrentLocation();
-          animal2.energyLevel = animal2.energyLevel! - 10;
-          animal2.hungryLevel = animal2.hungryLevel! - 10;
-          if (animal2.energyLevel! <= 0) {
-            animal2.isAlive = false;
-            print('${animal2.name} is DEAD');
+      if (animal1 is Carnivores || animal2 is Carnivores) {
+        // print('\n\t*****Fight begins*****');
+        if (animal1 is Carnivores && animal2 is Herbivores) {
+          isWin = (animal1 as Carnivores).fightCarnivores(animal2);
+          if (isWin == true) {
+            animal1.afterFight(true);
+            animal2.afterFight(false);
           } else {
-            print('${animal2.name} isnot DEAD');
+            print(
+                '**************************************************No Fights');
           }
-        } else if (animal2 is Carnivores &&
-            animal2.fightAnimals() == true &&
-            animal2.vision! >= animal1.vision!) {
-          (animal2 as Carnivores).fightCarnivores(animal1);
           _changeCurrentLocation();
-          animal1.energyLevel = animal1.energyLevel! - 10;
-          animal1.hungryLevel = animal1.hungryLevel! - 10;
-          if (animal1.energyLevel! <= 0) {
-            animal1.isAlive = false;
-            print('${animal1.name} is DEAD');
+        } else if (animal2 is Carnivores && animal1 is Herbivores) {
+          isWin = (animal2 as Carnivores).fightCarnivores(animal1);
+          if (isWin == true) {
+            animal2.afterFight(true);
+            animal1.afterFight(false);
           } else {
-            print('${animal1.name} isnot DEAD');
+            print(
+                '**************************************************No Fights');
           }
-        } else if (animal1 is Carnivores &&
-            animal2 is Carnivores &&
-            animal1.vision! >= animal2.vision!) {
-          (animal1 as Carnivores).fightCarnivores(animal2);
           _changeCurrentLocation();
-          animal2.energyLevel = animal2.energyLevel! - 10;
-          animal2.hungryLevel = animal2.hungryLevel! - 10;
-          if (animal2.energyLevel! <= 0) {
-            animal2.isAlive = false;
+        } else if (animal1 is Carnivores && animal2 is Carnivores) {
+          isWin = (animal1 as Carnivores).fightCarnivores(animal2);
+          if (isWin == true) {
+            animal1.afterFight(true);
+            animal2.afterFight(false);
+          } else if ((animal2 as Carnivores).fightCarnivores(animal1) == true) {
+            animal2.afterFight(true);
+            animal1.afterFight(false);
+            _changeCurrentLocation();
           }
-        } else {
-          print('**************************************************No Fights');
         }
       } else {
         print('\n******they are friends*****\n');
@@ -178,10 +170,7 @@ class Forest {
   void _winnerAnimal() {
     int x = 0, win = 0;
     for (int i = 0; i < animalList.length; i++) {
-      if (animalList[i] is Carnivores &&
-          animalList[i].isAlive == true &&
-          animalList[i].fightAnimals() == true &&
-          animalList[i].energyLevel! > 8) {
+      if (animalList[i] is Carnivores && animalList[i].isAlive == true) {
         x++;
         win = i;
       }

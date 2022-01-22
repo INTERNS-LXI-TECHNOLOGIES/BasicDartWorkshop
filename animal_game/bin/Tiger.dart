@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'dart:math';
+
 import 'animal.dart';
 import 'carnivores.dart';
 import 'location.dart';
@@ -24,11 +25,8 @@ class Tiger extends Animal implements Carnivores {
   Location roamLocation = Location(30, 30);
   Location currentLocation = Location(20, 20);
   @override
-  List getLocation() {
-    List<int> loclist = [];
-    loclist.add(roamLocation.x!);
-    loclist.add(roamLocation.y!);
-    return loclist;
+  Location getLocation() {
+    return roamLocation;
   }
 
   @override
@@ -41,23 +39,36 @@ class Tiger extends Animal implements Carnivores {
     print('$name  eat meat');
   }
 
-  bool fightAnimals() {
-    bool isFight = true;
-    return isFight;
+  @override
+  bool fightCarnivores(Animal ani) {
+    if (vision! > ani.vision!) {
+      if (energyLevel! >= ani.energyLevel! ||
+          hungryLevel! >= ani.hungryLevel!) {
+        print('***********************************$name is the winner');
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
-  @override
-  fightCarnivores(Animal ani) {
-    if (energyLevel! >= ani.energyLevel! || hungryLevel! >= ani.hungryLevel!) {
-      print('***********************************$name is the winner');
+  afterFight(bool isWin) {
+    if (isWin == true) {
       energyLevel = energyLevel! - 5;
       hungryLevel = hungryLevel! - 5;
       if (energyLevel! <= 0) {
         isAlive == false;
+        print('$name is DEAD ');
       }
-    } else if (ani is Carnivores && ani.energyLevel! > energyLevel! ||
-        ani.hungryLevel! > hungryLevel!) {
-      print('***********************************${ani.name} is the winner');
+    } else if (isWin == false) {
+      energyLevel = energyLevel! - 10;
+      hungryLevel = hungryLevel! - 10;
+      if (energyLevel! <= 0) {
+        isAlive == false;
+        print('$name is DEAD ');
+      }
     }
   }
 
