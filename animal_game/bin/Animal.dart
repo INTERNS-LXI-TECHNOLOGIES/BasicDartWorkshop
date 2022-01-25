@@ -22,6 +22,5 @@ abstract class Animal {
   _luckFact() {}
   Location? getLocation() {}
 
-  afterFight(bool isWin) {}
   changeCurrentLocation(int x, int y) {}
 }

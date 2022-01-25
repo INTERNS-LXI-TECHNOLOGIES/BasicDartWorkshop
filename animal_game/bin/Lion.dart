@@ -46,35 +46,41 @@ class Lion extends Animal implements Carnivores {
   var random = new Random();
 
   @override
-  bool fightCarnivores(Animal ani) {
-    if (vision! > ani.vision!) {
-      if (energyLevel! >= ani.energyLevel! ||
-          hungryLevel! >= ani.hungryLevel!) {
+  fight(Animal animal) {
+    if (vision! > animal.vision!) {
+      if (energyLevel! >= animal.energyLevel! ||
+          hungryLevel! >= animal.hungryLevel!) {
         print('***********************************$name is the winner');
-        return true;
-      } else {
-        return false;
+        animal.energyLevel != animal.energyLevel! - 10;
+        animal.hungryLevel != animal.hungryLevel! - 10;
+        if (animal.energyLevel! <= 0) {
+          isAlive = false;
+          print('$name is DEAD ');
+        }
+        energyLevel = energyLevel! - 5;
+        hungryLevel = hungryLevel! - 5;
+        if (energyLevel! <= 0) {
+          isAlive = false;
+          print('$name is DEAD ');
+        }
       }
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  afterFight(bool isWin) {
-    if (isWin == true) {
-      energyLevel = energyLevel! - 5;
-      hungryLevel = hungryLevel! - 5;
-      if (energyLevel! <= 0) {
-        isAlive == false;
-        print('$name is DEAD ');
-      }
-    } else if (isWin == false) {
-      energyLevel = energyLevel! - 10;
-      hungryLevel = hungryLevel! - 10;
-      if (energyLevel! <= 0) {
-        isAlive == false;
-        print('$name is DEAD ');
+    } else if (animal is Carnivores && animal.vision! > vision!) {
+      if (animal.energyLevel! >= energyLevel! ||
+          animal.hungryLevel! >= hungryLevel!) {
+        print('***********************************$name is the winner');
+        animal.energyLevel = animal.energyLevel! - 5;
+        animal.hungryLevel = animal.hungryLevel! - 5;
+        if (animal.energyLevel! <= 0) {
+          isAlive = false;
+          print('$name is DEAD ');
+          return true;
+        }
+        energyLevel = energyLevel! - 10;
+        hungryLevel = hungryLevel! - 10;
+        if (energyLevel! <= 0) {
+          isAlive = false;
+          print('$name is DEAD ');
+        }
       }
     }
   }
