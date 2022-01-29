@@ -5,11 +5,13 @@ import 'dart:math';
 import 'animal.dart';
 import 'carnivores.dart';
 import 'elephant.dart';
+import 'escape_exception.dart';
 import 'herbivores.dart';
 import 'lion.dart';
 import 'location.dart';
 import 'rabbit.dart';
 import 'tiger.dart';
+//import 'escape_exception.dart';
 
 class Forest {
   String name = "Dark Forest";
@@ -32,7 +34,6 @@ class Forest {
 
 //Animal deatails
   void printDetails() {
-    print(animalList[0].currentLocation.x);
     print('\n\n\t*************\n***** $name*****\n\t*******************\n');
 
     for (int i = 0; i < animalList.length; i++) {
@@ -78,8 +79,8 @@ class Forest {
       if (animal != animalList[i] && animal.isAlive == true) {
         Location? location1 = animal.getLocation();
         Location? location2 = animalList[i].getLocation();
-        int newRange = (((location1!.x)! - (location2!.x)!) + 1 ^
-            2 + ((location1.y)! - (location2.y)!) + 1 ^
+        int newRange = (((location1!.x) - (location2!.x)) + 1 ^
+            2 + ((location1.y) - (location2.y)) + 1 ^
             2);
         newRange = newRange.abs();
 
@@ -101,20 +102,38 @@ class Forest {
       print('\n\t*******${animal1.name} & ${animal2.name} are in the range');
       if (animal1 is Herbivores && animal2 is Carnivores) {
         isLuck = (animal1 as Herbivores).defendsHerb();
-        if (isLuck == true) {
-          _changeCurrentLocation();
-        } else {
-          _arrangeFight(animal1, animal2);
+        try {
+          checkEscape(true);
+          if (isLuck == true) {
+            (animal1 as Herbivores).grazeLocation;
+            _changeCurrentLocation();
+          } else {
+            _arrangeFight(animal1, animal2);
+          }
+        } on EscapeException {
+          EscapeException e = EscapeException();
+          e.exceptionMessage();
+          print('$e,${StackTrace.current}');
         }
       } else if (animal2 is Herbivores && animal1 is Carnivores) {
         isLuck = (animal2 as Herbivores).defendsHerb();
-        if (isLuck == true) {
-          _changeCurrentLocation();
-        } else {
-          _arrangeFight(animal1, animal2);
+        try {
+          checkEscape(true);
+          if (isLuck == true) {
+            (animal2 as Herbivores).grazeLocation;
+            _changeCurrentLocation();
+          } else {
+            _arrangeFight(animal1, animal2);
+          }
+        } on EscapeException {
+          EscapeException e = EscapeException();
+          e.exceptionMessage();
+          print('$e,${StackTrace.current}');
         }
       } else if (animal1 is Herbivores && animal2 is Herbivores) {
         print('they are friends');
+        (animal1 as Herbivores).grazeLocation;
+        (animal2 as Herbivores).grazeLocation;
         _changeCurrentLocation();
       } else if (animal1 is Carnivores && animal2 is Carnivores) {
         _arrangeFight(animal1, animal2);
@@ -131,12 +150,16 @@ class Forest {
         print('\n\t*****Fight begins*****');
         if (animal1 is Carnivores && animal2 is Herbivores) {
           (animal1 as Carnivores).fight(animal2);
+          (animal1 as Carnivores).roamLocation;
           _changeCurrentLocation();
         } else if (animal2 is Carnivores && animal1 is Herbivores) {
           (animal2 as Carnivores).fight(animal1);
+          (animal2 as Carnivores).roamLocation;
           _changeCurrentLocation();
         } else if (animal1 is Carnivores && animal2 is Carnivores) {
           (animal1 as Carnivores).fight(animal2);
+          (animal1 as Carnivores).roamLocation;
+          (animal2 as Carnivores).roamLocation;
         }
       }
       _winnerAnimal();
