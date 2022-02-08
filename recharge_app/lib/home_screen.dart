@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:recharge_app/recharge.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -40,17 +41,25 @@ class HomeScreen extends StatelessWidget {
                     });
               },
             ),
-            bottom: const TabBar(
+            bottom: TabBar(
               tabs: [
-                Tab(
+                const Tab(
                   icon: Icon(Icons.home),
                   text: 'home',
                 ),
                 Tab(
-                  icon: Icon(Icons.mobile_friendly_outlined),
-                  text: 'mobile',
+                  child: IconButton(
+                    icon: const Icon(Icons.mobile_friendly),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Recharge()),
+                      );
+                    },
+                  ),
                 ),
-                Tab(
+                const Tab(
                   icon: Icon(Icons.people),
                   text: 'recharge for others',
                 )
@@ -81,26 +90,77 @@ class HomeScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           color: Colors.black45,
                           child: const Image(
-                            image: AssetImage('images/offer.jpeg'),
+                            image: AssetImage("images/img.jpg"),
                             fit: BoxFit.fill,
                           ),
-                          // decoration: const BoxDecoration(
-                          //   color: Colors.black45,
-                          //   image: DecorationImage(
-                          //       image: AssetImage('images/offer.jpeg'),
-                          //       fit: BoxFit.fill),
-                          // ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Expanded(
+                Flexible(
                   flex: 1,
                   child: Container(
                     decoration: const BoxDecoration(
-                        color: Colors.cyan,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                      color: Colors.cyan,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Row(
+                      children: [
+                        //2nd coloumn 1st row
+                        Container(
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.music_note,
+                              semanticLabel: 'music',
+                              size: 40,
+                            ),
+                            onPressed: () {},
+                            splashRadius: 40,
+                          ),
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.height,
+                          decoration: const BoxDecoration(
+                            color: Colors.black12,
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                        ),
+                        //2nd coloumn 2nd row
+                        Container(
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.music_note,
+                              size: 40,
+                            ),
+                            onPressed: () {},
+                          ),
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.height,
+                          decoration: const BoxDecoration(
+                            color: Colors.black26,
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                        ),
+                        //2nd coloumn 3rd row
+                        Container(
+                          child: IconButton(
+                            splashColor: Colors.white10,
+                            splashRadius: 40,
+                            icon: const Icon(
+                              Icons.help,
+                              size: 40,
+                            ),
+                            onPressed: () {},
+                          ),
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.height,
+                          decoration: const BoxDecoration(
+                            color: Colors.black45,
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
