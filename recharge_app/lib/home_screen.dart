@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           backgroundColor: Colors.red,
           appBar: AppBar(
@@ -59,10 +59,6 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                const Tab(
-                  icon: Icon(Icons.people),
-                  text: 'recharge for others',
-                )
               ],
             ),
           ),
@@ -90,9 +86,11 @@ class HomeScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           color: Colors.black45,
                           child: const Image(
-                            image: AssetImage("images/img.jpg"),
+                            image: NetworkImage(
+                                'https://www.91-cdn.com/hub/wp-content/uploads/2020/12/vi_featured_recharge.jpg'),
                             fit: BoxFit.fill,
                           ),
+                          //fit: BoxFit.fill,
                         ),
                       ],
                     ),
@@ -164,13 +162,18 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20)),
+                    ),
+                    child: const Image(
+                      image: NetworkImage(
+                          'https://i.gadgets360cdn.com/large/jio_airtel_vi_vodafone_idea_image_1612358966262.jpg'),
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),

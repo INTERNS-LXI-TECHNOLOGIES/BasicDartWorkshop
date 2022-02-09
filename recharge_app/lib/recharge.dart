@@ -20,17 +20,27 @@ class Recharge extends StatelessWidget {
               child: Expanded(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3,
-                  color: Colors.black12,
+                  height: MediaQuery.of(context).size.height / 5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.black26),
                   child: Column(
                     children: [
-                      TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                      Center(
+                        child: TextField(
+                          cursorHeight: 5,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(gapPadding: 4.0),
+                            hintText: 'enter mobile number',
+                            prefixIcon: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.contacts),
+                              splashRadius: 20,
+                            ),
+                          ),
                         ),
                       ),
                       ElevatedButton(onPressed: () {}, child: Text('recharge')),
-                      const Text('REcharge'),
                     ],
                   ),
                 ),
@@ -40,8 +50,11 @@ class Recharge extends StatelessWidget {
               flex: 3,
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3,
+                height: 100, //MediaQuery.of(context).size.height / 3,
                 color: Colors.blue[300],
+                child: Image(
+                    image: NetworkImage(
+                        'https://www.myvi.in/content/dam/vodafoneideadigital/StaticPages/consumerimages/misc/data_delights_web_448x252.png')),
               ),
             ),
           ],
