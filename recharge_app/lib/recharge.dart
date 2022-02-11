@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
+// Import package
 
 import 'package:flutter/material.dart';
+import 'package:recharge_app/contacts.dart';
+import 'contacts.dart';
 
 class Recharge extends StatelessWidget {
   const Recharge({Key? key}) : super(key: key);
@@ -33,7 +36,13 @@ class Recharge extends StatelessWidget {
                             border: OutlineInputBorder(gapPadding: 4.0),
                             hintText: 'enter mobile number',
                             prefixIcon: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Contacts()),
+                                );
+                              },
                               icon: Icon(Icons.contacts),
                               splashRadius: 20,
                             ),
