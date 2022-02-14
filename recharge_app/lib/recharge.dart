@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:recharge_app/contacts.dart';
-import 'contacts.dart';
+//import 'contacts.dart';
 
 class Recharge extends StatelessWidget {
   const Recharge({Key? key}) : super(key: key);
@@ -36,13 +36,7 @@ class Recharge extends StatelessWidget {
                             border: OutlineInputBorder(gapPadding: 4.0),
                             hintText: 'enter mobile number',
                             prefixIcon: IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Contacts()),
-                                );
-                              },
+                              onPressed: () {},
                               icon: Icon(Icons.contacts),
                               splashRadius: 20,
                             ),
@@ -62,8 +56,8 @@ class Recharge extends StatelessWidget {
                 height: 100, //MediaQuery.of(context).size.height / 3,
                 color: Colors.blue[300],
                 child: Image(
-                    image: NetworkImage(
-                        'https://www.myvi.in/content/dam/vodafoneideadigital/StaticPages/consumerimages/misc/data_delights_web_448x252.png')),
+                  image: AssetImage(" asset/images/img.jpg"),
+                ),
               ),
             ),
           ],

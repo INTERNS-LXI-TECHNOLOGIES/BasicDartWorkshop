@@ -86,9 +86,7 @@ class HomeScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           color: Colors.black45,
                           child: const Image(
-                            image: NetworkImage(
-                                'https://www.91-cdn.com/hub/wp-content/uploads/2020/12/vi_featured_recharge.jpg'),
-                            fit: BoxFit.fill,
+                            image: AssetImage("asset/images/img.jpg"),
                           ),
                           //fit: BoxFit.fill,
                         ),
