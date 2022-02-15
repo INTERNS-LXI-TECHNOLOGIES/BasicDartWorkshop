@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class Contacts extends StatefulWidget {
 }
 
 class _ContactsState extends State<Contacts> {
-  List<Contact> _contacts = [];
+  List<Contact>? _contacts;
 
   @override
   void initState() {
@@ -18,8 +19,7 @@ class _ContactsState extends State<Contacts> {
   }
 
   Future<void> getContacts() async {
-   
-    final List<Contact> contacts = (await ContactsService.getContacts());
+    List<Contact> contacts = await FlutterContacts.getContacts();
     setState(() {
       _contacts = contacts;
     });
@@ -29,21 +29,21 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: (const Text('Contacts'),),
+        title: (const Text('Contacts')),
       ),
       body: Container(
-        
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount:_contacts.length,
-          itemBuilder: (context,index){
-            Contact contact=_contacts[index];
+          itemCount: _contacts!.length,
+          itemBuilder: (context, index) {
+            Contact contact = _contacts![index];
             return ListTile(
-              title: Text(contact.displayName!),
-              subtitle: Text(contact.phones!.elementAt(0).value!),
+              title: Text(contact.displayName),
+              subtitle: Text(contact.phones.elementAt(0).customLabel),
             );
-          },),
+          },
+        ),
       ),
-        );
+    );
   }
 }

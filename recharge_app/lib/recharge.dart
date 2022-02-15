@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-// Import package
-
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:recharge_app/contacts.dart';
+
 //import 'contacts.dart';
 
 class Recharge extends StatelessWidget {
@@ -24,7 +24,7 @@ class Recharge extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 5,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.black26),
                   child: Column(
@@ -36,7 +36,16 @@ class Recharge extends StatelessWidget {
                             border: OutlineInputBorder(gapPadding: 4.0),
                             hintText: 'enter mobile number',
                             prefixIcon: IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                // ignore: unrelated_type_equality_checks
+                                if (PermissionStatus.granted == true) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Contacts()),
+                                  );
+                                }
+                              },
                               icon: Icon(Icons.contacts),
                               splashRadius: 20,
                             ),
@@ -65,4 +74,17 @@ class Recharge extends StatelessWidget {
       ),
     );
   }
+
+  // Future<PermissionStatus> _getPermission() async {
+  //   final PermissionStatus permission = await Permission.contacts.status;
+  //   if (permission != PermissionStatus.granted &&
+  //       permission != PermissionStatus.denied) {
+  //     final Map<Permission, PermissionStatus> permissionStatus =
+  //         await [Permission.contacts].request();
+  //     return permissionStatus[Permission.contacts] ??
+  //         PermissionStatus.undetermined;
+  //   } else {
+  //     return permission;
+  //   }
+  // }
 }
