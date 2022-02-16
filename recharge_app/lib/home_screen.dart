@@ -54,7 +54,8 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Recharge()),
+                          builder: (context) => const Recharge(),
+                        ),
                       );
                     },
                   ),
@@ -86,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           color: Colors.black45,
                           child: const Image(
-                            image: AssetImage("asset/images/img.jpg"),
+                            image: AssetImage("assets/images/img.jpg"),
                           ),
                           //fit: BoxFit.fill,
                         ),

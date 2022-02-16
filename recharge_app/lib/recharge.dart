@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:recharge_app/contacts.dart';
 
 //import 'contacts.dart';
@@ -36,15 +35,14 @@ class Recharge extends StatelessWidget {
                             border: OutlineInputBorder(gapPadding: 4.0),
                             hintText: 'enter mobile number',
                             prefixIcon: IconButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 // ignore: unrelated_type_equality_checks
-                                if (PermissionStatus.granted == true) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Contacts()),
-                                  );
-                                }
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Contacts()),
+                                );
                               },
                               icon: Icon(Icons.contacts),
                               splashRadius: 20,
@@ -64,8 +62,8 @@ class Recharge extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 100, //MediaQuery.of(context).size.height / 3,
                 color: Colors.blue[300],
-                child: Image(
-                  image: AssetImage(" asset/images/img.jpg"),
+                child: const Image(
+                  image: AssetImage('assets/images/img.jpg'),
                 ),
               ),
             ),
