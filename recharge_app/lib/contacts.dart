@@ -50,7 +50,15 @@ class _ContactsState extends State<Contacts> {
                 TextField(
                   controller: searchController,
                   enabled: true,
-                  //  onChanged: (value) => searchContacts(value),
+                  onChanged: (value) {
+                    setState(() {
+                      (_searchList = _contacts!
+                          .where((element) => element.displayName
+                              .toLowerCase()
+                              .contains(value.toLowerCase()))
+                          .toList());
+                    });
+                  },
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(20),
                     labelText: 'search',
@@ -79,34 +87,19 @@ class _ContactsState extends State<Contacts> {
 
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: _contacts!.length,
+      itemCount: searchController.text.isNotEmpty
+          ? _searchList!.length
+          : _contacts!.length,
       itemBuilder: (context, i) => ListTile(
-        trailing: Text(_contacts![i].phones.first.number),
-        title: Text(_contacts![i].displayName),
-        //  leading: (image),
-
-        // onTap: () async {
-        //   //      final fullContact = await FlutterContacts.getContacts(
-        //   // withProperties: true, withPhoto: true);
-        //   final fullContact = await FlutterContacts.getContact(_contacts![i].id,
-        //       withPhoto: true);
-        //   await Navigator.of(context).push(
-        //     MaterialPageRoute(builder: (_) => ContactPage(fullContact!)),
-        //   );
-        // },
+        title: Text(searchController.text.isNotEmpty
+            ? _searchList![i].displayName
+            : _contacts![i].displayName),
+        trailing: Text(searchController.text.isNotEmpty
+            ? _searchList![i].phones.first.number
+            : _contacts![i].phones.first.number),
       ),
     );
   }
-
-  // void searchContacts(String value) {
-  //   List<Contacts> temp =_contacts![i].phones.((contact) {
-  //     return contact.fullName.contains(value);
-  //   }).toList();
-
-  //   setState(() {
-  //     _searchList = temp;
-  //   });
-  // }
 
   void searchContacts() {
     _contacts!.retainWhere((contact) {
@@ -120,9 +113,6 @@ class _ContactsState extends State<Contacts> {
     });
   }
 }
-
-
-
 
 // class ContactPage extends StatelessWidget {
 //   final Contact contact;
@@ -142,4 +132,22 @@ class _ContactsState extends State<Contacts> {
 //           ],
 //         ),
 //       );
+// }        //  leading: (image),
+
+// onTap: () async {
+//   //      final fullContact = await FlutterContacts.getContacts(
+//   // withProperties: true, withPhoto: true);
+//   final fullContact = await FlutterContacts.getContact(_contacts![i].id,
+//       withPhoto: true);
+//   await Navigator.of(context).push(
+//     MaterialPageRoute(builder: (_) => ContactPage(fullContact!)),
+//   );
+// }, // void searchContacts(String value) {
+//   List<Contacts> temp =_contacts![i].phones.((contact) {
+//     return contact.fullName.contains(value);
+//   }).toList();
+
+//   setState(() {
+//     _searchList = temp;
+//   });
 // }
