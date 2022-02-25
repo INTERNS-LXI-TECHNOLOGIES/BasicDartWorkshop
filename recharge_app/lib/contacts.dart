@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
@@ -15,16 +13,16 @@ class Contacts extends StatefulWidget {
 class _ContactsState extends State<Contacts> {
   List<Contact>? _contacts;
   List<Contact>? _searchList;
-  final TextEditingController searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
   bool _permissionDenied = false;
 
   @override
   void initState() {
     super.initState();
     _fetchContacts();
-    searchController.addListener(() {
-      searchContacts();
-    });
+    // searchController.addListener(() {
+    //   searchContacts();
+    // });
   }
 
   Future _fetchContacts() async {
@@ -41,42 +39,41 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) => MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: Text('contacts list'),
+            title: Text('contacts list-${_contacts!.length}'),
           ),
-          body: SafeArea(
-            child: Column(
-              children: [
-                //  Padding(padding: EdgeInsets.all(20)),
-                TextField(
-                  controller: searchController,
-                  enabled: true,
-                  onChanged: (value) {
-                    setState(() {
-                      (_searchList = _contacts!
-                          .where((element) => element.displayName
-                              .toLowerCase()
-                              .contains(value.toLowerCase()))
-                          .toList());
-                    });
-                  },
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(20),
-                    labelText: 'search',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor, width: 5),
-                    ),
+          body: Column(
+            children: [
+              Padding(padding: EdgeInsets.all(20)),
+              TextField(
+                controller: searchController,
+                enabled: true,
+                onChanged: (value) {
+                  setState(() {
+                    (_searchList = _contacts!
+                        .where((element) => element.displayName
+                            .toLowerCase()
+                            .contains(value.toLowerCase()))
+                        .toList());
+                  });
+                },
+                decoration: InputDecoration(
+                  //border: OutlineInputBorder(gapPadding: 4.0),
+                  contentPadding: EdgeInsets.all(20),
+                  labelText: 'search',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor, width: 5),
                   ),
                 ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    child: _body(),
-                  ),
-                )
-              ],
-            ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: _body(),
+                ),
+              )
+            ],
           ),
         ),
       );
@@ -100,54 +97,4 @@ class _ContactsState extends State<Contacts> {
       ),
     );
   }
-
-  void searchContacts() {
-    _contacts!.retainWhere((contact) {
-      String searchTerm = searchController.text.toLowerCase();
-      String contactName = contact.displayName.toLowerCase();
-      return contactName.contains(searchTerm);
-    });
-
-    setState(() {
-      _searchList = _contacts;
-    });
-  }
 }
-
-// class ContactPage extends StatelessWidget {
-//   final Contact contact;
-//   ContactPage(this.contact);
-
-//   @override
-//   Widget build(BuildContext context) => Scaffold(
-//         appBar: AppBar(title: Text(contact.displayName)),
-//         body: Column(
-//           children: [
-//             Text('First name: ${contact.name.first}'),
-//             Text('Last name: ${contact.name.last}'),
-//             Text(
-//                 'Phone number: ${contact.phones.isNotEmpty ? contact.phones.first.number : '(none)'}'),
-//             Text(
-//                 'Email address: ${contact.emails.isNotEmpty ? contact.emails.first.address : '(none)'}'),
-//           ],
-//         ),
-//       );
-// }        //  leading: (image),
-
-// onTap: () async {
-//   //      final fullContact = await FlutterContacts.getContacts(
-//   // withProperties: true, withPhoto: true);
-//   final fullContact = await FlutterContacts.getContact(_contacts![i].id,
-//       withPhoto: true);
-//   await Navigator.of(context).push(
-//     MaterialPageRoute(builder: (_) => ContactPage(fullContact!)),
-//   );
-// }, // void searchContacts(String value) {
-//   List<Contacts> temp =_contacts![i].phones.((contact) {
-//     return contact.fullName.contains(value);
-//   }).toList();
-
-//   setState(() {
-//     _searchList = temp;
-//   });
-// }
