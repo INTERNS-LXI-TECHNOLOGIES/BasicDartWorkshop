@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+
 import 'package:recharge_app/contacts.dart';
 
 //import 'contacts.dart';
 
-class Recharge extends StatelessWidget {
-  const Recharge({Key? key}) : super(key: key);
+class Recharge extends StatefulWidget {
+  Recharge({Key? key}) : super(key: key);
+
+  @override
+  State<Recharge> createState() => _RechargeState();
+}
+
+class _RechargeState extends State<Recharge> {
+  final _key = GlobalKey<FormState>();
+  TextEditingController validController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,45 +22,60 @@ class Recharge extends StatelessWidget {
         title: const Text("enter number for recharge"),
         backgroundColor: Colors.red,
       ),
-      body: SafeArea(
+      body: Form(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Expanded(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 5,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.black26),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: TextField(
-                          cursorHeight: 5,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(gapPadding: 4.0),
-                            hintText: 'enter mobile number',
-                            prefixIcon: IconButton(
-                              onPressed: () {
-                                // ignore: unrelated_type_equality_checks
-
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Contacts()),
-                                );
-                              },
-                              icon: Icon(Icons.contacts),
-                              splashRadius: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(onPressed: () {}, child: Text('recharge')),
-                    ],
-                  ),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.black26),
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: validController,
+                      autofocus: true,
+                      validator: (value) {
+                        String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                        RegExp regExp = RegExp(pattern);
+                        if (value == null ||
+                            value.isEmpty ||
+                            !regExp.hasMatch(value)) {
+                          return 'Please enter valid mobile number';
+                        }
+                        return null;
+                      },
+                      // decoration: InputDecoration(
+                      //   border: OutlineInputBorder(gapPadding: 4.0),
+                      //   hintText: 'enter mobile number',
+                      //   suffixIcon: IconButton(
+                      //     onPressed: () {
+                      //       Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => Contacts()),
+                      //       );
+                      //     },
+                      //     icon: Icon(Icons.contacts),
+                      //     splashRadius: 20,
+                      //   ),
+                      // ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          if (_key.currentState!.validate()) {
+                            // ('number not valid');
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   const SnackBar(content: Text('Processing Data')),
+                            // );
+                          }
+                        },
+                        child: Text('recharge')),
+                  ],
                 ),
               ),
             ),
@@ -72,17 +95,4 @@ class Recharge extends StatelessWidget {
       ),
     );
   }
-
-  // Future<PermissionStatus> _getPermission() async {
-  //   final PermissionStatus permission = await Permission.contacts.status;
-  //   if (permission != PermissionStatus.granted &&
-  //       permission != PermissionStatus.denied) {
-  //     final Map<Permission, PermissionStatus> permissionStatus =
-  //         await [Permission.contacts].request();
-  //     return permissionStatus[Permission.contacts] ??
-  //         PermissionStatus.undetermined;
-  //   } else {
-  //     return permission;
-  //   }
-  // }
 }

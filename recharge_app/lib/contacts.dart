@@ -15,22 +15,24 @@ class _ContactsState extends State<Contacts> {
   List<Contact>? _searchList;
   TextEditingController searchController = TextEditingController();
   bool _permissionDenied = false;
+  List<Contact>? contactList;
 
   @override
   void initState() {
     super.initState();
     _fetchContacts();
-    // searchController.addListener(() {
-    //   searchContacts();
-    // });
   }
 
   Future _fetchContacts() async {
     if (!await FlutterContacts.requestPermission(readonly: true)) {
       setState(() => _permissionDenied = true);
     } else {
-      final contacts = await FlutterContacts.getContacts(
+      List<Contact> contacts = await FlutterContacts.getContacts(
           withPhoto: true, withProperties: true);
+      // contacts = contacts
+      //     .where((element) => element.phones.first.number.isNotEmpty)
+      //     .toList();
+
       setState(() => _contacts = contacts);
     }
   }
@@ -39,7 +41,7 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) => MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: Text('contacts list-${_contacts!.length}'),
+            title: Text('contacts -[${_contacts!.length}]'),
           ),
           body: Column(
             children: [
@@ -49,11 +51,13 @@ class _ContactsState extends State<Contacts> {
                 enabled: true,
                 onChanged: (value) {
                   setState(() {
-                    (_searchList = _contacts!
-                        .where((element) => element.displayName
-                            .toLowerCase()
-                            .contains(value.toLowerCase()))
-                        .toList());
+                    (value.isNotEmpty
+                        ? (_searchList = _contacts!
+                            .where((element) => element.displayName
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList())
+                        : (_contacts != _contacts));
                   });
                 },
                 decoration: InputDecoration(
@@ -91,9 +95,10 @@ class _ContactsState extends State<Contacts> {
         title: Text(searchController.text.isNotEmpty
             ? _searchList![i].displayName
             : _contacts![i].displayName),
-        trailing: Text(searchController.text.isNotEmpty
-            ? _searchList![i].phones.first.number
-            : _contacts![i].phones.first.number),
+
+        // trailing: Text(searchController.text.isNotEmpty
+        //     ? _searchList![i].phones.first.number
+        //     : _contacts![i].phones.first.number),
       ),
     );
   }
