@@ -12,7 +12,7 @@ class Recharge extends StatefulWidget {
 }
 
 class _RechargeState extends State<Recharge> {
-  final _key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey();
   TextEditingController validController = TextEditingController();
 
   @override
@@ -23,6 +23,7 @@ class _RechargeState extends State<Recharge> {
         backgroundColor: Colors.red,
       ),
       body: Form(
+        key: _key,
         child: Column(
           children: [
             Padding(
@@ -38,58 +39,62 @@ class _RechargeState extends State<Recharge> {
                     TextFormField(
                       keyboardType: TextInputType.number,
                       controller: validController,
+                      enabled: true,
                       autofocus: true,
                       validator: (value) {
-                        String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                        String pattern =
+                            r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
                         RegExp regExp = RegExp(pattern);
-                        if (value == null ||
-                            value.isEmpty ||
-                            !regExp.hasMatch(value)) {
+                        if (value == null) {
+                          return 'enter mobile number';
+                        } else if (value.isEmpty || !regExp.hasMatch(value)) {
                           return 'Please enter valid mobile number';
                         }
                         return null;
                       },
-                      // decoration: InputDecoration(
-                      //   border: OutlineInputBorder(gapPadding: 4.0),
-                      //   hintText: 'enter mobile number',
-                      //   suffixIcon: IconButton(
-                      //     onPressed: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //             builder: (context) => Contacts()),
-                      //       );
-                      //     },
-                      //     icon: Icon(Icons.contacts),
-                      //     splashRadius: 20,
-                      //   ),
-                      // ),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(gapPadding: 4.0),
+                        hintText: 'enter mobile number',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Contacts()),
+                            );
+                          },
+                          icon: Icon(Icons.contacts),
+                          splashRadius: 20,
+                        ),
+                      ),
                     ),
                     ElevatedButton(
-                        onPressed: () {
-                          if (_key.currentState!.validate()) {
-                            // ('number not valid');
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   const SnackBar(content: Text('Processing Data')),
-                            // );
-                          }
-                        },
-                        child: Text('recharge')),
+                      onPressed: () {
+                        _key.currentState!.validate();
+                        if (_key.currentState == null) {
+                          // ('number not valid');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                        }
+                      },
+                      child: const Text('recharge'),
+                    ),
                   ],
                 ),
               ),
             ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 100, //MediaQuery.of(context).size.height / 3,
-                color: Colors.blue[300],
-                child: const Image(
-                  image: AssetImage('assets/images/img.jpg'),
-                ),
-              ),
-            ),
+            // Expanded(
+            //   flex: 3,
+            //   child: Container(
+            //     width: MediaQuery.of(context).size.width,
+            //     height: 100, //MediaQuery.of(context).size.height / 3,
+            //     color: Colors.blue[300],
+            //     child: const Image(
+            //       image: AssetImage('assets/images/img.jpg'),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
