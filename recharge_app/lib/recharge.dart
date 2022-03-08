@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:recharge_app/contacts.dart';
 
 //import 'contacts.dart';
@@ -14,6 +13,7 @@ class Recharge extends StatefulWidget {
 class _RechargeState extends State<Recharge> {
   final GlobalKey<FormState> _key = GlobalKey();
   TextEditingController validController = TextEditingController();
+  bool isValid = true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,10 @@ class _RechargeState extends State<Recharge> {
                             r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
                         RegExp regExp = RegExp(pattern);
                         if (value == null) {
+                          isValid = false;
                           return 'enter mobile number';
                         } else if (value.isEmpty || !regExp.hasMatch(value)) {
+                          isValid = false;
                           return 'Please enter valid mobile number';
                         }
                         return null;
@@ -71,11 +73,12 @@ class _RechargeState extends State<Recharge> {
                     ElevatedButton(
                       onPressed: () {
                         _key.currentState!.validate();
-                        if (_key.currentState == null) {
-                          // ('number not valid');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
+                        if (isValid == true) {
+                          getRecharge();
+                          //--_key.currentState == null
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(content: Text('Processing Data')),
+                          // );
                         }
                       },
                       child: const Text('recharge'),
