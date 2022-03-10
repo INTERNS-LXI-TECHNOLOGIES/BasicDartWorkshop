@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recharge_app/api.dart';
 import 'package:recharge_app/contacts.dart';
 
 //import 'contacts.dart';
@@ -74,7 +75,7 @@ class _RechargeState extends State<Recharge> {
                       onPressed: () {
                         _key.currentState!.validate();
                         if (isValid == true) {
-                          getRecharge();
+                          getRecharge(amount: 9);
                           //--_key.currentState == null
                           // ScaffoldMessenger.of(context).showSnackBar(
                           //   const SnackBar(content: Text('Processing Data')),
