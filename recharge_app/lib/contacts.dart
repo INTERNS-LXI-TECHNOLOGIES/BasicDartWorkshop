@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
+import 'offer_screen.dart';
+
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
 
@@ -44,29 +46,32 @@ class _ContactsState extends State<Contacts> {
             title: Text('contacts -[${_contacts!.length}]'),
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.all(20)),
-              TextField(
-                controller: searchController,
-                enabled: true,
-                onChanged: (value) {
-                  setState(() {
-                    (value.isNotEmpty
-                        ? (_searchList = _contacts!
-                            .where((element) => element.displayName
-                                .toLowerCase()
-                                .contains(value.toLowerCase()))
-                            .toList())
-                        : (_contacts != _contacts));
-                  });
-                },
-                decoration: InputDecoration(
-                  //border: OutlineInputBorder(gapPadding: 4.0),
-                  contentPadding: EdgeInsets.all(20),
-                  labelText: 'search',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor, width: 5),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: searchController,
+                  enabled: true,
+                  onChanged: (value) {
+                    setState(() {
+                      (value.isNotEmpty
+                          ? (_searchList = _contacts!
+                              .where((element) => element.displayName
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase()))
+                              .toList())
+                          : (_contacts != _contacts));
+                    });
+                  },
+                  decoration: InputDecoration(
+                    //border: OutlineInputBorder(gapPadding: 4.0),
+                    contentPadding: EdgeInsets.all(20),
+                    labelText: 'search',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 5),
+                    ),
                   ),
                 ),
               ),
@@ -95,10 +100,12 @@ class _ContactsState extends State<Contacts> {
         title: Text(searchController.text.isNotEmpty
             ? _searchList![i].displayName
             : _contacts![i].displayName),
-
-        // trailing: Text(searchController.text.isNotEmpty
-        //     ? _searchList![i].phones.first.number
-        //     : _contacts![i].phones.first.number),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Offer()),
+          );
+        },
       ),
     );
   }

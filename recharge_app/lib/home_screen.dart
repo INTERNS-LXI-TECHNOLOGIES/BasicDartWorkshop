@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Tab(
                   child: IconButton(
+                    tooltip: 'recharge',
                     icon: const Icon(Icons.mobile_friendly),
                     onPressed: () {
                       Navigator.push(
@@ -90,71 +91,6 @@ class HomeScreen extends StatelessWidget {
                             image: AssetImage("assets/images/img.jpg"),
                           ),
                           //fit: BoxFit.fill,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.cyan,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Row(
-                      children: [
-                        //2nd coloumn 1st row
-                        Container(
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.music_note,
-                              semanticLabel: 'music',
-                              size: 40,
-                            ),
-                            onPressed: () {},
-                            splashRadius: 40,
-                          ),
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height,
-                          decoration: const BoxDecoration(
-                            color: Colors.black12,
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                        ),
-                        //2nd coloumn 2nd row
-                        Container(
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.music_note,
-                              size: 40,
-                            ),
-                            onPressed: () {},
-                          ),
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height,
-                          decoration: const BoxDecoration(
-                            color: Colors.black26,
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                        ),
-                        //2nd coloumn 3rd row
-                        Container(
-                          child: IconButton(
-                            splashColor: Colors.white10,
-                            splashRadius: 40,
-                            icon: const Icon(
-                              Icons.help,
-                              size: 40,
-                            ),
-                            onPressed: () {},
-                          ),
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height,
-                          decoration: const BoxDecoration(
-                            color: Colors.black45,
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
                         ),
                       ],
                     ),

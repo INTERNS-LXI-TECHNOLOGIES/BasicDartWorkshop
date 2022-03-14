@@ -1,14 +1,28 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:recharge_app/model/recharge_response.dart';
 import 'recharge.dart';
 
-Future<void> getRecharge({required int amount}) async {
-  var url = Uri.parse(
-      'http://planapi.in/api/Mobile/RofferCheck?apimember_id=4306&api_password=ajil@123&mobile_no=9656240099&operator_code=23');
+class Api {
+  String? _mNumber;
 
-  var _response = await http.get(url);
-  final _json = jsonDecode(_response.body) as Map<String, dynamic>;
-  print(_json);
+  setNumber(String number) {
+    _mNumber = number;
+  }
+
+  String getNumber() {
+    return _mNumber!;
+  }
+
+  Future<RechargeResponse> getRecharge({required int opCode}) async {
+    print(getNumber());
+    var url = Uri.parse(
+        'http://planapi.in/api/Mobile/RofferCheck?apimember_id=4306&api_password=ajil@123&mobile_no=${getNumber()}&operator_code=$opCode');
+
+    var _response = await http.get(url);
+    final _json = jsonDecode(_response.body) as Map<String, dynamic>;
+    //print(_json);
+    final _offers = RechargeResponse.fromJson(_json);
+    return _offers;
+  }
 }

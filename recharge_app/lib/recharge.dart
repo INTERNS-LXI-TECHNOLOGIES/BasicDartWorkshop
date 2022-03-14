@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_app/api.dart';
 import 'package:recharge_app/contacts.dart';
+import 'package:recharge_app/model/recharge_response.dart';
+import 'package:recharge_app/offer_screen.dart';
 
 //import 'contacts.dart';
 
@@ -15,6 +17,7 @@ class _RechargeState extends State<Recharge> {
   final GlobalKey<FormState> _key = GlobalKey();
   TextEditingController validController = TextEditingController();
   bool isValid = true;
+  String? mobNum;
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +49,17 @@ class _RechargeState extends State<Recharge> {
                         String pattern =
                             r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
                         RegExp regExp = RegExp(pattern);
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           isValid = false;
                           return 'enter mobile number';
-                        } else if (value.isEmpty || !regExp.hasMatch(value)) {
+                        } else if (!regExp.hasMatch(value)) {
                           isValid = false;
                           return 'Please enter valid mobile number';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(gapPadding: 4.0),
+                        border: const OutlineInputBorder(gapPadding: 4.0),
                         hintText: 'enter mobile number',
                         suffixIcon: IconButton(
                           onPressed: () {
@@ -72,14 +75,17 @@ class _RechargeState extends State<Recharge> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         _key.currentState!.validate();
+
                         if (isValid == true) {
-                          getRecharge(amount: 9);
-                          //--_key.currentState == null
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //   const SnackBar(content: Text('Processing Data')),
-                          // );
+                          debugPrint(validController.text);
+                          Api().setNumber(validController.text);
+                          //Api().mNumber = validController.text;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Offer()),
+                          );
                         }
                       },
                       child: const Text('recharge'),
@@ -88,17 +94,15 @@ class _RechargeState extends State<Recharge> {
                 ),
               ),
             ),
-            // Expanded(
-            //   flex: 3,
-            //   child: Container(
-            //     width: MediaQuery.of(context).size.width,
-            //     height: 100, //MediaQuery.of(context).size.height / 3,
-            //     color: Colors.blue[300],
-            //     child: const Image(
-            //       image: AssetImage('assets/images/img.jpg'),
-            //     ),
-            //   ),
-            // ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 100, //MediaQuery.of(context).size.height / 3,
+                color: Colors.blue[300],
+                //child: _body(),
+              ),
+            )
           ],
         ),
       ),
