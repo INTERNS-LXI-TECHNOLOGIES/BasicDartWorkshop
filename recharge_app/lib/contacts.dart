@@ -112,14 +112,20 @@ class _ContactsState extends State<Contacts> {
             api.number(mobNumber);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Offer()),
+              MaterialPageRoute(
+                  builder: (context) => Offer(
+                        api: api,
+                      )),
             );
           } else if (isSearch == false) {
             mobNumber = _contacts![i].phones.first.number;
             api.number(mobNumber);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Offer()),
+              MaterialPageRoute(
+                  builder: (context) => Offer(
+                        api: api,
+                      )),
             );
           }
         },

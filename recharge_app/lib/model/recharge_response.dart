@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 RechargeResponse rechargeResponseFromJson(String str) =>
     RechargeResponse.fromJson(json.decode(str));
 
@@ -25,14 +27,17 @@ class RechargeResponse {
   List<Rdatum>? rdata;
   String? message;
 
-  factory RechargeResponse.fromJson(Map<String, dynamic> json) =>
-      RechargeResponse(
-        error: json["ERROR"],
-        status: json["STATUS"],
-        mobileno: json["MOBILENO"],
-        rdata: List<Rdatum>.from(json["RDATA"].map((x) => Rdatum.fromJson(x))),
-        message: json["MESSAGE"],
-      );
+  factory RechargeResponse.fromJson(Map<String, dynamic> json) {
+    debugPrint('Api response: $json');
+    return RechargeResponse(
+      error: json["ERROR"],
+      status: json["STATUS"],
+      mobileno: json["MOBILENO"],
+      rdata: List.from(json["RDATA"]).map((e) => Rdatum.fromJson(e)).toList(),
+      //rdata: List<Rdatum>.from(json["RDATA"].map((x) => Rdatum.fromJson(x))),
+      message: json["MESSAGE"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "ERROR": error,

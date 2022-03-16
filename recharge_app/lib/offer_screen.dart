@@ -4,7 +4,8 @@ import 'package:recharge_app/api.dart';
 import 'model/recharge_response.dart';
 
 class Offer extends StatefulWidget {
-  Offer({Key? key}) : super(key: key);
+  final Api api;
+  const Offer({Key? key, required this.api}) : super(key: key);
 
   @override
   State<Offer> createState() => _OfferState();
@@ -17,12 +18,11 @@ class _OfferState extends State<Offer> {
     super.initState();
   }
 
-  Api api = Api();
-
   Future<RechargeResponse> planResponse() async {
-    String mobileNumber = api.number;
-    print('${api.number}//////////////////////////');
-    final _planOff = await api.getRecharge(opCode: 23, number: mobileNumber);
+    String mobileNumber = widget.api.number;
+    print('${widget.api.number}//////////////////////////');
+    final _planOff =
+        await widget.api.getRecharge(opCode: 23, number: mobileNumber);
     _planOff.rdata!.first.ofrtext;
     return _planOff;
   }
