@@ -11,13 +11,18 @@ class Offer extends StatefulWidget {
 }
 
 class _OfferState extends State<Offer> {
+  @override
   void initState() {
     planResponse();
     super.initState();
   }
 
+  Api api = Api();
+
   Future<RechargeResponse> planResponse() async {
-    final _planOff = await Api().getRecharge(opCode: 23);
+    String mobileNumber = api.number;
+    print('${api.number}//////////////////////////');
+    final _planOff = await api.getRecharge(opCode: 23, number: mobileNumber);
     _planOff.rdata!.first.ofrtext;
     return _planOff;
   }

@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:recharge_app/api.dart';
+import 'package:recharge_app/recharge.dart';
 
 import 'offer_screen.dart';
 
@@ -18,6 +20,8 @@ class _ContactsState extends State<Contacts> {
   TextEditingController searchController = TextEditingController();
   bool _permissionDenied = false;
   List<Contact>? contactList;
+  bool isSearch = false;
+  Api api = Api();
 
   @override
   void initState() {
@@ -55,6 +59,7 @@ class _ContactsState extends State<Contacts> {
                   enabled: true,
                   onChanged: (value) {
                     setState(() {
+                      isSearch = true;
                       (value.isNotEmpty
                           ? (_searchList = _contacts!
                               .where((element) => element.displayName
@@ -100,11 +105,23 @@ class _ContactsState extends State<Contacts> {
         title: Text(searchController.text.isNotEmpty
             ? _searchList![i].displayName
             : _contacts![i].displayName),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Offer()),
-          );
+        onTap: () async {
+          String mobNumber;
+          if (isSearch == true) {
+            mobNumber = _searchList![i].phones.first.number;
+            api.number(mobNumber);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Offer()),
+            );
+          } else if (isSearch == false) {
+            mobNumber = _contacts![i].phones.first.number;
+            api.number(mobNumber);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Offer()),
+            );
+          }
         },
       ),
     );

@@ -18,6 +18,7 @@ class _RechargeState extends State<Recharge> {
   TextEditingController validController = TextEditingController();
   bool isValid = true;
   String? mobNum;
+  Api api = Api();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,8 @@ class _RechargeState extends State<Recharge> {
                           isValid = false;
                           return 'Please enter valid mobile number';
                         }
+
+                        //api.number(value);
                         return null;
                       },
                       decoration: InputDecoration(
@@ -77,11 +80,9 @@ class _RechargeState extends State<Recharge> {
                     ElevatedButton(
                       onPressed: () async {
                         _key.currentState!.validate();
-
                         if (isValid == true) {
-                          debugPrint(validController.text);
-                          Api().setNumber(validController.text);
-                          //Api().mNumber = validController.text;
+                          // final mobNum = validController.text;
+                          api.number(validController.text);
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Offer()),
