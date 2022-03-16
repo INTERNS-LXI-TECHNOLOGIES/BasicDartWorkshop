@@ -80,12 +80,17 @@ class _RechargeState extends State<Recharge> {
                     ElevatedButton(
                       onPressed: () async {
                         _key.currentState!.validate();
+                        debugPrint('phone number: ${validController.text}');
                         if (isValid == true) {
                           // final mobNum = validController.text;
-                          api.number(validController.text);
+                          debugPrint('key.currentState is valid');
+                          api.number = validController.text;
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Offer()),
+                            MaterialPageRoute(
+                                builder: (context) => Offer(
+                                      api: api,
+                                    )),
                           );
                         }
                       },

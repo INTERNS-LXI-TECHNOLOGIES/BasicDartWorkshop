@@ -109,17 +109,23 @@ class _ContactsState extends State<Contacts> {
           String mobNumber;
           if (isSearch == true) {
             mobNumber = _searchList![i].phones.first.number;
-            api.number(mobNumber);
+            api.number = mobNumber;
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Offer()),
+              MaterialPageRoute(
+                  builder: (context) => Offer(
+                        api: api,
+                      )),
             );
-          } else if (isSearch == false) {
+          } else {
             mobNumber = _contacts![i].phones.first.number;
-            api.number(mobNumber);
+            api.number = mobNumber;
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Offer()),
+              MaterialPageRoute(
+                  builder: (context) => Offer(
+                        api: api,
+                      )),
             );
           }
         },

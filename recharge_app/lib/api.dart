@@ -13,23 +13,21 @@ class Api {
 
   set number(number) {
     _number = number;
-    print('$_number////////////******//////////////');
   }
-
-  // getNumber(String number) {
-  //   this.number = number;
-  //   print('$number////////////******//////////////');
-  // }
-
-  // setNumber {
-  //   print('$number//////////////////////////');
-  //   return number;
-  // }
 
   Future<RechargeResponse> getRecharge(
       {required int opCode, required String number}) async {
+    String? rNumber;
+    if (number.length > 10) {
+      rNumber = number.substring(3);
+    } else if (number.length == 10) {
+      rNumber = number;
+    } else {
+      rNumber = null;
+    }
+
     var url = Uri.parse(
-        'http://planapi.in/api/Mobile/RofferCheck?apimember_id=4306&api_password=ajil@123&mobile_no="$number"&operator_code=$opCode');
+        'http://planapi.in/api/Mobile/RofferCheck?apimember_id=4306&api_password=ajil@123&mobile_no=$rNumber&operator_code=$opCode');
 
     var _response = await http.get(url);
     final _json = jsonDecode(_response.body) as Map<String, dynamic>;
