@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_app/api.dart';
+import 'package:recharge_app/model/api_response/api_response.dart';
 
 import 'model/recharge_response.dart';
 
@@ -18,13 +19,13 @@ class _OfferState extends State<Offer> {
     super.initState();
   }
 
-  Future<RechargeResponse> planResponse() async {
+  Future<ApiResponse> planResponse() async {
     String mobileNumber = widget.api.number;
-    print('${widget.api.number}//////////////////////////');
-    final _planOff =
-        await widget.api.getRecharge(opCode: 23, number: mobileNumber);
-    _planOff.rdata!.first.ofrtext;
-    return _planOff;
+    final _planOffer = await widget.api.getRecharge(opCode: 23);
+    // final _planOff =
+    //     await widget.api.getRecharge(opCode: 23, number: mobileNumber);
+    // _planOff.rdata!.first.ofrtext;
+    return _planOffer;
   }
 
   @override
@@ -37,7 +38,7 @@ class _OfferState extends State<Offer> {
   }
 
   Widget _offers() {
-    return FutureBuilder<RechargeResponse>(
+    return FutureBuilder<ApiResponse>(
         future: planResponse(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.none ||
@@ -48,12 +49,12 @@ class _OfferState extends State<Offer> {
             padding: const EdgeInsets.all(10.0),
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: snapshot.data!.rdata!.length,
+              itemCount: snapshot.data!.rdata!.frc!.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) => ListTile(
-                title: Text('${snapshot.data!.rdata![index].ofrtext}'),
+                title: Text('${snapshot.data!.rdata!.frc![index].desc}'),
                 leading: CircleAvatar(
-                  child: Text('${snapshot.data!.rdata![index].price}'),
+                  child: Text('${snapshot.data!.rdata!.frc![index].rs}'),
                 ),
               ),
             ),

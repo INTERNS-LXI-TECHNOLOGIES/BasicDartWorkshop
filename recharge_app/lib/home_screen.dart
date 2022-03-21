@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height,
                           color: Colors.black45,
                           child: const Image(
-                            image: AssetImage("images/img.jpg"),
+                            image: AssetImage("assets/images/img.jpg"),
                           ),
                           //fit: BoxFit.fill,
                         ),
