@@ -25,7 +25,7 @@ class _RechargeState extends State<Recharge> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("enter number for recharge"),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue[500],
       ),
       body: Form(
         key: _key,
@@ -102,11 +102,15 @@ class _RechargeState extends State<Recharge> {
             ),
             Expanded(
               flex: 3,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 100, //MediaQuery.of(context).size.height / 3,
-                color: Colors.blue[300],
-                //child: _body(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.black26),
+                  width: MediaQuery.of(context).size.width,
+                  height: 100, //MediaQuery.of(context).size.height / 3,
+
+                  //child: _body(),
+                ),
               ),
             )
           ],

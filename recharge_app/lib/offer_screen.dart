@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_app/api.dart';
 import 'package:recharge_app/model/api_response/api_response.dart';
-
-import 'model/recharge_response.dart';
+import 'package:recharge_app/model/api_response/rdata.dart';
 
 class Offer extends StatefulWidget {
   final Api api;
@@ -13,31 +12,65 @@ class Offer extends StatefulWidget {
 }
 
 class _OfferState extends State<Offer> {
+  List<String> listFtt = [];
   @override
   void initState() {
     planResponse();
     super.initState();
   }
 
+  String? mobileNumber;
   Future<ApiResponse> planResponse() async {
-    String mobileNumber = widget.api.number;
+    mobileNumber = widget.api.number;
     final _planOffer = await widget.api.getRecharge(opCode: 23);
-    // final _planOff =
-    //     await widget.api.getRecharge(opCode: 23, number: mobileNumber);
-    // _planOff.rdata!.first.ofrtext;
     return _planOffer;
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return DefaultTabController(
+      length: 4,
       child: Scaffold(
-        body: _offers(),
+        appBar: AppBar(
+          title: Text('recharge for $mobileNumber'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                text: 'unlimited',
+              ),
+              Tab(
+                text: 'Top up',
+              ),
+              Tab(
+                text: 'data',
+              ),
+              Tab(
+                text: 'others',
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Container(
+              child: _offers(1),
+            ),
+            Container(
+              child: _offers(2),
+            ),
+            Container(
+              child: _offers(3),
+            ),
+            Container(
+              child: _offers(4),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _offers() {
+  Widget? _offers(int value) {
     return FutureBuilder<ApiResponse>(
         future: planResponse(),
         builder: (context, snapshot) {
@@ -45,20 +78,73 @@ class _OfferState extends State<Offer> {
               snapshot.hasError) {
             return const Center(child: CircularProgressIndicator());
           }
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: snapshot.data!.rdata!.frc!.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => ListTile(
-                title: Text('${snapshot.data!.rdata!.frc![index].desc}'),
-                leading: CircleAvatar(
-                  child: Text('${snapshot.data!.rdata!.frc![index].rs}'),
+          switch (value) {
+            case 1:
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.rdata!.fulltt!.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('${snapshot.data!.rdata!.fulltt![index].desc}'),
+                    leading: CircleAvatar(
+                      child: Text('${snapshot.data!.rdata!.fulltt![index].rs}'),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
+              );
+
+            case 2:
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.rdata!.topup!.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('${snapshot.data!.rdata!.topup![index].desc}'),
+                    leading: CircleAvatar(
+                      child: Text('${snapshot.data!.rdata!.topup![index].rs}'),
+                    ),
+                  ),
+                ),
+              );
+            case 3:
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.rdata!.data!.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('${snapshot.data!.rdata!.data![index].desc}'),
+                    leading: CircleAvatar(
+                      child: Text('${snapshot.data!.rdata!.data![index].rs}'),
+                    ),
+                  ),
+                ),
+              );
+            case 4:
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.rdata!.stv!.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text('${snapshot.data!.rdata!.stv![index].desc}'),
+                    leading: CircleAvatar(
+                      child: Text('${snapshot.data!.rdata!.stv![index].rs}'),
+                    ),
+                  ),
+                ),
+              );
+            default:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+          }
         });
   }
 }

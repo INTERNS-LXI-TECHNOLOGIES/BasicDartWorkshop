@@ -9,9 +9,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue[500],
           appBar: AppBar(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue[500],
             toolbarHeight: 30,
             title: const Text('Recharge App'),
             actions: [
@@ -48,8 +48,8 @@ class HomeScreen extends StatelessWidget {
                   text: 'home',
                 ),
                 Tab(
+                  height: 100,
                   child: IconButton(
-                    tooltip: 'recharge',
                     icon: const Icon(Icons.mobile_friendly),
                     onPressed: () {
                       Navigator.push(
@@ -60,6 +60,7 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  // text: 'recharge',
                 ),
               ],
             ),
@@ -71,8 +72,7 @@ class HomeScreen extends StatelessWidget {
                   flex: 2,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.deepOrangeAccent[100],
-                      // borderRadius: BorderRadius.circular(20),
+                      color: Colors.blue[500],
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20)),
@@ -87,9 +87,7 @@ class HomeScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height,
                           color: Colors.black45,
-                          child: const Image(
-                            image: AssetImage("assets/images/img.jpg"),
-                          ),
+                          child: Image.asset('assets/images/img.jpg'),
                           //fit: BoxFit.fill,
                         ),
                       ],

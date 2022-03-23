@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:recharge_app/model/api_response/api_response.dart';
-import 'package:recharge_app/model/recharge_response.dart';
 import 'recharge.dart';
 
 class Api {
