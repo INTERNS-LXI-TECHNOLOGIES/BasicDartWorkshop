@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_app/api.dart';
 import 'package:recharge_app/model/api_response/api_response.dart';
-import 'package:recharge_app/model/api_response/rdata.dart';
 
 class Offer extends StatefulWidget {
   final Api api;
@@ -20,9 +19,11 @@ class _OfferState extends State<Offer> {
   }
 
   String? mobileNumber;
+  int? opCod;
   Future<ApiResponse> planResponse() async {
     mobileNumber = widget.api.number;
-    final _planOffer = await widget.api.getRecharge(opCode: 23);
+    opCod = widget.api.opCode;
+    final _planOffer = await widget.api.getRecharge(opCode: opCod!);
     return _planOffer;
   }
 

@@ -15,6 +15,14 @@ class Api {
     _number = number;
   }
 
+  var _opCode;
+
+  get opCode => _opCode;
+
+  set opCode(opCode) {
+    _opCode = opCode;
+  }
+
   Future<ApiResponse> getRecharge({required int opCode}) async {
     String? rNumber;
     if (number.length > 10) {
@@ -27,7 +35,7 @@ class Api {
 
     var url = Uri.parse(
         //'http://planapi.in/api/Mobile/RofferCheck?apimember_id=4306&api_password=ajil@123&mobile_no=$rNumber&operator_code=$opCode');
-        'http://planapi.in/api/Mobile/Operatorplan?apimember_id=4306&api_password=ajil@123&cricle=95&operatorcode=23');
+        'http://planapi.in/api/Mobile/Operatorplan?apimember_id=4306&api_password=ajil@123&cricle=95&operatorcode=$opCode');
 
     var _response = await http.get(url);
     final _json = jsonDecode(_response.body) as Map<String, dynamic>;

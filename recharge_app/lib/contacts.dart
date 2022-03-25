@@ -35,9 +35,6 @@ class _ContactsState extends State<Contacts> {
     } else {
       List<Contact> contacts = await FlutterContacts.getContacts(
           withPhoto: true, withProperties: true);
-      // contacts = contacts
-      //     .where((element) => element.phones.first.number.isNotEmpty)
-      //     .toList();
 
       setState(() => _contacts = contacts);
     }

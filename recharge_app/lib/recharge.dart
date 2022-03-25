@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:recharge_app/api.dart';
 import 'package:recharge_app/contacts.dart';
@@ -19,6 +21,7 @@ class _RechargeState extends State<Recharge> {
   bool isValid = true;
   String? mobNum;
   Api api = Api();
+  bool isSelect = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,29 +75,64 @@ class _RechargeState extends State<Recharge> {
                                   builder: (context) => Contacts()),
                             );
                           },
-                          icon: Icon(Icons.contacts),
+                          icon: const Icon(Icons.contacts),
                           splashRadius: 20,
                         ),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        _key.currentState!.validate();
-                        debugPrint('phone number: ${validController.text}');
-                        if (isValid == true) {
-                          // final mobNum = validController.text;
-                          debugPrint('key.currentState is valid');
-                          api.number = validController.text;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Offer(
-                                      api: api,
-                                    )),
-                          );
-                        }
-                      },
-                      child: const Text('recharge'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            isSelect = true;
+                            api.opCode = 23;
+                          },
+                          child: const Text('Vi'),
+                          // style:ButtonStyle(backgroundColor:) ,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              isSelect = true;
+                              api.opCode = 2;
+                            },
+                            child: const Text('airtel')),
+                        ElevatedButton(
+                            onPressed: () {
+                              isSelect = true;
+                              api.opCode = 4;
+                            },
+                            child: const Text('bsnl')),
+                        ElevatedButton(
+                            onPressed: () {
+                              isSelect = true;
+                              api.opCode = 11;
+                            },
+                            child: const Text('jio')),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            _key.currentState!.validate();
+                            debugPrint('phone number: ${validController.text}');
+                            if (isValid == true && isSelect == true) {
+                              // final mobNum = validController.text;
+                              debugPrint('key.currentState is valid');
+                              api.number = validController.text;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Offer(
+                                          api: api,
+                                        )),
+                              );
+                            } else {}
+                          },
+                          child: const Text('recharge'),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -105,9 +143,23 @@ class _RechargeState extends State<Recharge> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.black26),
+                  decoration: const BoxDecoration(color: Colors.black26),
                   width: MediaQuery.of(context).size.width,
                   height: 100, //MediaQuery.of(context).size.height / 3,
+                  // child: Column(
+                  //   children: [
+                  //     ElevatedButton(
+                  //       onPressed: () {},
+                  //       child: const Text('Vi'),
+                  //     ),
+                  //     ElevatedButton(
+                  //         onPressed: () {}, child: const Text('airtel')),
+                  //     ElevatedButton(
+                  //         onPressed: () {}, child: const Text('bsnl')),
+                  //     ElevatedButton(
+                  //         onPressed: () {}, child: const Text('jio')),
+                  //   ],
+                  // ),
 
                   //child: _body(),
                 ),
