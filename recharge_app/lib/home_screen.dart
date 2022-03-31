@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recharge_app/recharge.dart';
 
@@ -84,12 +83,13 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.black45,
-                          child: Image.asset('images/img.jpg'),
-                          //fit: BoxFit.fill,
-                        ),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            color: Colors.black45,
+                            child: const Image(
+                              image: AssetImage('images/img.jpg'),
+                              fit: BoxFit.fill,
+                            )),
                       ],
                     ),
                   ),

@@ -83,32 +83,10 @@ class _RechargeState extends State<Recharge> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            isSelect = true;
-                            api.opCode = 23;
-                          },
-                          child: const Text('Vi'),
-                          // style:ButtonStyle(backgroundColor:) ,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              isSelect = true;
-                              api.opCode = 2;
-                            },
-                            child: const Text('airtel')),
-                        ElevatedButton(
-                            onPressed: () {
-                              isSelect = true;
-                              api.opCode = 4;
-                            },
-                            child: const Text('bsnl')),
-                        ElevatedButton(
-                            onPressed: () {
-                              isSelect = true;
-                              api.opCode = 11;
-                            },
-                            child: const Text('jio')),
+                        selectOperator('vi', 23),
+                        selectOperator('airtel', 2),
+                        selectOperator('bsnl', 4),
+                        selectOperator('jio', 11),
                       ],
                     ),
                     Column(
@@ -145,29 +123,23 @@ class _RechargeState extends State<Recharge> {
                 child: Container(
                   decoration: const BoxDecoration(color: Colors.black26),
                   width: MediaQuery.of(context).size.width,
-                  height: 100, //MediaQuery.of(context).size.height / 3,
-                  // child: Column(
-                  //   children: [
-                  //     ElevatedButton(
-                  //       onPressed: () {},
-                  //       child: const Text('Vi'),
-                  //     ),
-                  //     ElevatedButton(
-                  //         onPressed: () {}, child: const Text('airtel')),
-                  //     ElevatedButton(
-                  //         onPressed: () {}, child: const Text('bsnl')),
-                  //     ElevatedButton(
-                  //         onPressed: () {}, child: const Text('jio')),
-                  //   ],
-                  // ),
-
-                  //child: _body(),
+                  height: 100,
                 ),
               ),
             )
           ],
         ),
       ),
+    );
+  }
+
+  ElevatedButton selectOperator(String opName, int opCode) {
+    return ElevatedButton(
+      onPressed: () {
+        isSelect = true;
+        api.opCode = opCode;
+      },
+      child: Text(opName),
     );
   }
 }

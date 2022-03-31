@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_app/api.dart';
 import 'package:recharge_app/model/api_response/api_response.dart';
+import 'package:recharge_app/payment_screen.dart';
 
 class Offer extends StatefulWidget {
   final Api api;
@@ -92,6 +93,14 @@ class _OfferState extends State<Offer> {
                     leading: CircleAvatar(
                       child: Text('${snapshot.data!.rdata!.fulltt![index].rs}'),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               );
@@ -108,6 +117,14 @@ class _OfferState extends State<Offer> {
                     leading: CircleAvatar(
                       child: Text('${snapshot.data!.rdata!.topup![index].rs}'),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               );
@@ -123,6 +140,14 @@ class _OfferState extends State<Offer> {
                     leading: CircleAvatar(
                       child: Text('${snapshot.data!.rdata!.data![index].rs}'),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               );
@@ -138,6 +163,14 @@ class _OfferState extends State<Offer> {
                     leading: CircleAvatar(
                       child: Text('${snapshot.data!.rdata!.stv![index].rs}'),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               );
