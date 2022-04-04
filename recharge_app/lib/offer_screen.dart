@@ -80,105 +80,51 @@ class _OfferState extends State<Offer> {
               snapshot.hasError) {
             return const Center(child: CircularProgressIndicator());
           }
+          List fullTT = snapshot.data!.rdata!.fulltt!;
+          List topUp = snapshot.data!.rdata!.topup!;
+          List data = snapshot.data!.rdata!.data!;
+          List stv = snapshot.data!.rdata!.stv!;
           switch (value) {
             case 1:
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.rdata!.fulltt!.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('${snapshot.data!.rdata!.fulltt![index].desc}'),
-                    leading: CircleAvatar(
-                      child: Text('${snapshot.data!.rdata!.fulltt![index].rs}'),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PaymentScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
+              return selectOffer(fullTT);
 
             case 2:
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.rdata!.topup!.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('${snapshot.data!.rdata!.topup![index].desc}'),
-                    leading: CircleAvatar(
-                      child: Text('${snapshot.data!.rdata!.topup![index].rs}'),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PaymentScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
+              return selectOffer(topUp);
+
             case 3:
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.rdata!.data!.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('${snapshot.data!.rdata!.data![index].desc}'),
-                    leading: CircleAvatar(
-                      child: Text('${snapshot.data!.rdata!.data![index].rs}'),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PaymentScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
+              return selectOffer(data);
             case 4:
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.rdata!.stv!.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text('${snapshot.data!.rdata!.stv![index].desc}'),
-                    leading: CircleAvatar(
-                      child: Text('${snapshot.data!.rdata!.stv![index].rs}'),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PaymentScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
+              return selectOffer(stv);
             default:
               return const Center(
                 child: CircularProgressIndicator(),
               );
           }
         });
+  }
+
+  Padding selectOffer(List<dynamic> offers) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: offers.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) => ListTile(
+          title: Text('${offers[index].desc}'),
+          leading: CircleAvatar(
+            child: Text('${offers[index].rs}'),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PaymentScreen(),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

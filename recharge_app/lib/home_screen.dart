@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:recharge_app/recharge.dart';
 
@@ -42,14 +44,13 @@ class HomeScreen extends StatelessWidget {
             ),
             bottom: TabBar(
               tabs: [
-                const Tab(
+                Tab(
                   icon: Icon(Icons.home),
                   text: 'home',
                 ),
                 Tab(
                   height: 100,
-                  child: IconButton(
-                    icon: const Icon(Icons.mobile_friendly),
+                  child: TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -58,8 +59,11 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     },
+                    child: Icon(
+                      Icons.mobile_friendly,
+                      color: Colors.white,
+                    ),
                   ),
-                  // text: 'recharge',
                 ),
               ],
             ),
