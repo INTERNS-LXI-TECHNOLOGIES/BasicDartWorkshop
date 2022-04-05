@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -12,7 +13,7 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   @override
-  static const platform = const MethodChannel("razorpay_flutter");
+  //static const platform = const MethodChannel("razorpay_flutter");
 
   late Razorpay _razorpay;
 
@@ -49,29 +50,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   void openCheckout() async {
-    // var options = {
-    //   'key': 'rzp_test_qZ7mwSEeAogtzf',
-    //   'amount': 100,
-    //   'name': 'Acme Corp.',
-    //   'description': 'Fine T-Shirt',
-    //   'retry': {'enabled': true, 'max_count': 1},
-    //   'send_sms_hash': false,
-    //   'prefill': {'contact': '9656240099', 'email': 'ajilsajeev916@gmail.com'},
-    //   'external': {
-    //     'wallets': ['paytm']
-    //   }
     var options = {
-      "id": "order_6JUYuvmgCLfgjY",
-      "entity": "order",
-      "amount": 50000,
-      "currency": "INR",
-      "attempts": 0,
-      "status": "created",
-      "receipt": "receipt#42",
-      "notes": [],
-      "created_at": 1474013013
+      'key': 'rzp_test_qZ7mwSEeAogtzf',
+      'amount': 100,
+      'name': 'Acme Corp.',
+      'description': 'Fine T-Shirt',
+      'prefill': {'contact': '9656240099', 'email': 'test@razorpay.com'}
     };
-
     try {
       _razorpay.open(options);
     } catch (e) {
@@ -79,9 +64,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {}
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
 
-  void _handlePaymentError(PaymentFailureResponse response) {}
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
 
-  void _handleExternalWallet(ExternalWalletResponse response) {}
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
 }
