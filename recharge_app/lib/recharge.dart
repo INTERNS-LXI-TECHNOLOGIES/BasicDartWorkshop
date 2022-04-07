@@ -95,7 +95,6 @@ class _RechargeState extends State<Recharge> {
                             _key.currentState!.validate();
                             debugPrint('phone number: ${validController.text}');
                             if (isValid == true && isSelect == true) {
-                              // final mobNum = validController.text;
                               debugPrint('key.currentState is valid');
                               api.number = validController.text;
                               Navigator.push(

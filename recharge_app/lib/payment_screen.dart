@@ -3,9 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:recharge_app/offer_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+  final amount;
+  final mobileNumber;
+  const PaymentScreen(
+      {Key? key, required this.amount, required this.mobileNumber})
+      : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -52,10 +57,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void openCheckout() async {
     var options = {
       'key': 'rzp_test_qZ7mwSEeAogtzf',
-      'amount': 100,
-      'name': 'Acme Corp.',
-      'description': 'Fine T-Shirt',
-      'prefill': {'contact': '9656240099', 'email': 'test@razorpay.com'}
+      'amount': widget.amount,
+      'name': 'recharge',
+      //'description': 'recharge',
+      'prefill': {'contact': widget.mobileNumber, 'email': 'test@razorpay.com'}
     };
     try {
       _razorpay.open(options);

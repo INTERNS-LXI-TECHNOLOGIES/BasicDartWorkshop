@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:recharge_app/api.dart';
 import 'package:recharge_app/model/api_response/api_response.dart';
 import 'package:recharge_app/payment_screen.dart';
@@ -12,7 +13,6 @@ class Offer extends StatefulWidget {
 }
 
 class _OfferState extends State<Offer> {
-  List<String> listFtt = [];
   @override
   void initState() {
     planResponse();
@@ -20,6 +20,9 @@ class _OfferState extends State<Offer> {
   }
 
   String? mobileNumber;
+  // PaymentScreen paymentScreen =  PaymentScreen();
+  var rechargeAmount;
+
   int? opCod;
   Future<ApiResponse> planResponse() async {
     mobileNumber = widget.api.number;
@@ -115,11 +118,17 @@ class _OfferState extends State<Offer> {
           leading: CircleAvatar(
             child: Text('${offers[index].rs}'),
           ),
-          onTap: () {
+          onTap: () async {
+            rechargeAmount = offers[index].rs;
+            debugPrint('amount:${offers[index].rs}');
+
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PaymentScreen(),
+                builder: (context) => PaymentScreen(
+                  amount: rechargeAmount,
+                  mobileNumber: mobileNumber,
+                ),
               ),
             );
           },
