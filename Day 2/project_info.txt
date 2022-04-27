@@ -1,1 +1,19 @@
 Do the Day 2 programs in this folder
+void main()
+{
+int i,space,rows,k=0;
+print('enter the number of rows');
+for(i=1; i<rows; ++i; k=0)
+{
+for(space=1; space=rows; ++space)
+{
+print('');
+}
+while(k!=2* i=1)
+{
+print('*');
+++k;
+}
+print('\n');
+}
+}
