@@ -1,15 +1,1 @@
 Do the Day 5 programs in this folder
-void main()
-{
-int n,r;
-print('enter the numbers');
-if(n < o)
-{
-print('not possible');
-}
-else
-{
-r = fibo(n);
-print('the numbers in the fibonacci series', n , r);
-}
-}
