@@ -1,14 +1,13 @@
 import 'dart:io';
 void main()
 {
-int i, j, numbers;
-for (int i = 0; i <= 8; i++)
+int i, j, n=5;
+for (int i = 1; i <= n; i++)
  {
-for(int j = 0;j<=i;j++)
+for(int j = 1;j<=i;j++)
   {
- stdout.write('$numbers');
+ stdout.write('$i');
   }
- numbers++;
  stdout.writeln();
 }
 }
