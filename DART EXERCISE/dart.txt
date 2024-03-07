@@ -1,0 +1,345 @@
+EXERCISE 1
+
+void main() {
+ 
+    print('i am ready to support micky mouse');
+  }
+}
+
+
+EXERCISE 2
+
+void main()
+{
+  int num =4;
+  bool result=true;
+  double num2=3.5;
+  String word='false';
+  print(num);
+}
+
+EXERCISE 3
+
+void main()
+{
+int num1=30;
+  int num2=2;
+  int num3=num1+num2;
+  print(num3);
+}
+
+EXERCISE 4
+
+void main()
+{
+int num1=30;
+  int num2=2;
+add(num1,num2); 
+}
+
+ void add(int sum1,int sum2)
+{
+ print(sum1+sum2); 
+}
+
+EXERCISE 5
+
+void main()
+{
+int num1=30;
+  int num2=2;
+print(add(num1,num2)); 
+}
+
+  add(int sum1,int sum2)
+{ 
+   return sum1+sum2;
+}
+
+
+EXERCISE 6
+
+void main()
+{
+int age=5;
+  if (age>=18)
+    print('Eligible for vote');
+  else
+    print('Note eligible for vote');
+}
+
+EXERCISE 7
+
+void main()
+{
+int age=18;
+  if (age>=18)
+{
+    print('Eligible for vote');
+}
+  
+ else if(age<0)
+    print('sorry... something went wrong');
+  
+  else
+    print('Note eligible for vote');
+}
+
+EXERCISE 8
+
+void main()
+{
+int i,m; 
+  for(i=1;i<=100;i++)
+  {
+   m=i*3;
+    print(m);
+  }
+}
+
+EXERCISE 9
+
+void main()
+{
+int ; 
+  for(int i=1;i<=100;i++)
+  {
+   
+  if(i%3==0&&i%5!=0)
+  {
+    print(i);
+  }
+  }
+}
+
+EXERCISE 10
+
+void main() 
+{
+  for(int i=1;i<=100;i++)
+  {
+   if(i%3==0&&i%5!=0&&i%9!=0) 
+   {
+     print(i);
+   }
+  }
+}
+
+EXERCISE 11
+
+void main()
+{
+  int i=1;
+ while(i<=100)
+  {
+   if (i%3==0)
+   {
+     print(i); 
+   }
+     i++;
+   
+ }
+}
+  
+void main()
+{
+  int i=1;
+ while(i<=100)
+  {
+   if (i%3==0&&i%5!=0&&i%9!=0)
+   {
+     print(i); 
+   }
+     i++;
+   
+ }
+}
+  
+EXERCISE 12
+
+void main()
+{
+ List listoffridge = ["Apple", "Orange", "Mango", "Mango", "Orange",
+"Apple", "Orange", "Mango", "Mango", "Orange","Apple"];
+  for(int i=0;i<listoffridge.length;i++)
+  {
+   if(i)
+   print(listoffridge[i]); 
+  }
+  
+  
+}
+
+EXERCISE 13
+
+void main()
+{
+ List listoffridge = ["Apple", "Orange", "Mango", "Mango", "Orange",
+"Apple", "Orange", "Mango", "Mango", "Orange","Apple"];
+  int numberofApples = 0;
+int numberofMangoes = 0;
+int numberofOranges = 0;
+for(int i=0;i<listoffridge.length;i++) 
+{
+  if(listoffridge[i]=="Apple")
+  {
+numberofApples=numberofApples+1;
+}
+   if(listoffridge[i]=="Orange")
+  {
+    numberofOranges=numberofOranges+1;
+  }
+  if(listoffridge[i]=="Mango")
+  {
+    numberofMangoes=numberofMangoes+1;
+  }
+}
+print('Apples: $numberofApples, Oranges: $numberofOranges, Mangoes:$numberofMangoes');
+
+
+}
+
+EXERCISE 14
+
+void main()
+{
+  List listoffridge = ["Apple", "Orange", "Mango", "Mango", "Orange",
+"Apple", "Orange", "Mango", "Mango", "Orange","Apple"];
+  
+  List fridgeforapple=[];
+  List fridgefororange=[];
+  List fridgeformango=[];
+  
+  for(int i=0;i<listoffridge.length;i++)
+  {
+    if(listoffridge[i]=="Apple")
+    {
+      fridgeforapple.add(listoffridge[i]);
+    }
+    else if(listoffridge[i]=="Orange")
+    {
+    fridgefororange.add(listoffridge[i]);
+    }
+    else if(listoffridge[i]=="Mango")
+    {
+    fridgeformango.add(listoffridge[i]);  
+    }
+  }
+  print('Apple:$fridgeforapple,Orange:$fridgefororange,Mango:$fridgeformango');
+}
+ 
+EXERCISE 15
+
+a)PRIME NUMBER
+
+void main() {
+  for (int i = 2; i <= 100; i++) {
+    if (isPrime(i)) {
+      print(i );
+    }
+  }
+}
+
+bool isPrime(int number) {
+  if (number <= 1) {
+    return false;
+  }
+  for (int i = 2; i <= number / 2; i++) {
+    if (number % i == 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+b)AMSTRONG NUMBERS
+
+import 'dart:math';
+
+void main() {
+  for (int i = 1; i <= 100; i++) {
+    if (isArmstrongNumber(i)) {
+      print('$i is an Armstrong number');
+    }
+  }
+}
+
+bool isArmstrongNumber(int number) 
+{
+  int originalNumber = number;
+  int sum = 0;
+  int power = numberOfDigits(number);
+
+  while (number > 0) 
+{
+    int digit = number % 10;
+    sum += pow(digit, power).toInt(); 
+    number ~/= 10;
+  }
+
+  return sum == originalNumber;
+}
+
+int numberOfDigits(int number) 
+{
+  int count = 0;
+  while (number > 0) 
+{
+    count++;
+    number ~/= 10;
+  }
+  return count;
+}
+
+c)PALINDROME NUMBERS
+
+void main() {
+  for (int i = 1; i <= 100; i++) 
+  {
+    if(i%11==0)
+    {
+      print(i);
+    }
+  }
+}
+
+
+d)PERFECT NUMBERS
+
+void main() {
+  for (int i = 1; i <= 100; i++) 
+{
+    int sum = 0;
+
+    for (int j = 1; j < i; j++)
+ {
+      if (i % j == 0) 
+{
+        sum += j; 
+      }
+    }
+
+    if (sum == i) 
+{
+      print('$i is a perfect number.');
+    }
+  }
+}
+
+
+e)PERFECT SQAURES
+
+void main() {
+  for (int i = 2; i <= 100; i++) 
+  {
+    int square=i*i;
+    if(square<=100)
+    {
+      print('$square');
+    }
+  }
+}
+
+
+
